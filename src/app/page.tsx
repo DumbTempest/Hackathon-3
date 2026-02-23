@@ -2,8 +2,10 @@
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 
@@ -21,14 +23,15 @@ function Model() {
 }
 
 export default function Home() {
+  const { data: session, status } = useSession();
+
   return (
     <main className="h-screen w-full bg-[#FAF3E1] p-10 font-tektur overflow-hidden">
-
-      {/* NAVBAR */}
-      <div className="flex justify-end gap-6 mb-6 mr-20">
-        <Link href="/room" passHref>
+      {status === 'authenticated' && (
+        <Link href="/login" passHref>
           <Button
             asChild
+            onClick={() => signOut({ callbackUrl: '/' })}
             className="
       bg-[#FF6D1F]
       text-white
@@ -43,13 +46,37 @@ export default function Home() {
       transition-all
     "
           >
-            <a>Rooms</a>
+            <a>Logout</a>
           </Button>
         </Link>
+      )}
 
-        <Link href="/login" passHref>
+      {status === "unauthenticated" && (
+        <div className="flex justify-end gap-6 mb-6 mr-20">
+          <Link href="/room" passHref>
+            <Button
+              asChild
+              className="
+      bg-[#FF6D1F]
+      text-white
+      border-4 border-[#222222]
+      rounded-2xl
+      shadow-[6px_6px_0px_0px_#222222]
+      font-bold
+      px-10 py-5
+      active:translate-x-1
+      active:translate-y-1
+      active:shadow-none
+      transition-all
+    "
+            >
+              <a>Rooms</a>
+            </Button>
+          </Link>
+
           <Button
             asChild
+            onClick={() => signIn('google', { callbackUrl: '/' })}
             className="
       bg-[#FF6D1F]
       text-white
@@ -66,11 +93,10 @@ export default function Home() {
           >
             <a>Login</a>
           </Button>
-        </Link>
 
-        <Link href="/signup" passHref>
           <Button
             asChild
+            onClick={() => signIn('google', { callbackUrl: '/' })}
             className="
       bg-[#FF6D1F]
       text-white
@@ -87,8 +113,9 @@ export default function Home() {
           >
             <a>Signup</a>
           </Button>
-        </Link>
-      </div>
+        </div>
+      )
+      }
 
       {/* MAIN CONTENT */}
       <div className="grid grid-cols-2 gap-16 items-start">
