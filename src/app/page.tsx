@@ -1,61 +1,83 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
-import { Suspense, useRef, useEffect } from "react";
-import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
+import { Text } from "@react-three/drei";
+import { Suspense } from "react";
 
-function AnimatedShelf() {
+function Model() {
   const { scene } = useGLTF("/models/model1.glb");
-  const bookRef = useRef<THREE.Object3D | null>(null);
 
-  const progress = useRef(0); // 0 → 1 animation progress
+  return (
+    <primitive
+      object={scene}
+      scale={2}
+      position={[0, 0, 0]}
+    />
+  );
+}
 
-  useEffect(() => {
-    const book = scene.getObjectByName("mesh1437755864_1");
-    if (book) {
-      bookRef.current = book;
-    }
-  }, [scene]);
+function ModelWithText() {
+  const { scene } = useGLTF("/models/model1.glb");
 
-  useFrame((_, delta) => {
-    if (!bookRef.current) return;
+  return (
+    <>
+      <primitive
+        object={scene}
+        scale={2}
+        position={[0, 0, 0]}
+        rotation={[0, Math.PI, 0]}
+      />
 
-    if (progress.current < 1) {
-      progress.current += delta * 0.5; // speed
-    }
-
-    const book = bookRef.current;
-
-    // --- Stage 1: Slide Out (0 → 0.5)
-    if (progress.current <= 0.5) {
-      const slideProgress = progress.current / 0.5;
-      book.position.z = THREE.MathUtils.lerp(0, 2, slideProgress);
-    }
-
-    // --- Stage 2: Rotate (0.5 → 1)
-    if (progress.current > 0.5) {
-      const rotateProgress = (progress.current - 0.5) / 0.5;
-      book.rotation.y = THREE.MathUtils.lerp(0, Math.PI / 2, rotateProgress);
-    }
-  });
-
-  return <primitive object={scene} scale={2} />;
+      {/* 3D Text */}
+      <Text
+        position={[0, 2, 0]}   // adjust position
+        fontSize={0.5}
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+      >
+        My Shelf
+      </Text>
+    </>
+  );
 }
 
 export default function Home() {
   return (
-    <main className="h-screen w-screen bg-white overflow-hidden">
-      <Canvas className="bg-transparent" camera={{ position: [0, 2, 6], fov: 50 }}>
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
+    <main className="absolute h-screen w-screen bg-transparent overflow-hidden">
 
-        <Suspense fallback={null}>
-          <AnimatedShelf />
-        </Suspense>
+  <Canvas
+    className="relative inset-0 z-10"
+    camera={{ position: [0, 2, 5], fov: 50 }}
+  >
+    <ambientLight intensity={0.8} />
+    <directionalLight position={[5, 0, 0]} intensity={1} />
 
-        <OrbitControls />
-      </Canvas>
-    </main>
+    <Suspense fallback={null}>
+      <Model />
+    </Suspense>
+    <Suspense fallback={null}>
+  <ModelWithText />
+</Suspense>
+
+    <OrbitControls />
+  </Canvas>
+
+  <div className="absolute z-10 flex h-full flex-col items-center justify-center text-white text-center px-6 top-10 pointer-events-none">
+    <h1 className="text-5xl md:text-7xl font-bold">
+      My 3D Showcase
+    </h1>
+
+    <p className="mt-6 text-lg md:text-xl max-w-xl opacity-80">
+      Built with Next.js, React Three Fiber, and GLB models.
+    </p>
+
+    <button className="mt-8 px-6 py-3 bg-black text-white rounded-lg font-semibold hover:scale-105 transition">
+      Explore
+    </button>
+  </div>
+
+</main>
   );
 }
