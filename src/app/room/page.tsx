@@ -85,7 +85,7 @@ function RoomModel({
   );
 }
 
-/* ---------------- SCENE ---------------- */
+
 
 function Scene() {
   const modelScale = 3;
@@ -149,18 +149,17 @@ function Scene() {
   );
 }
 
-/* ---------------- PAGE ---------------- */
+
 
 export default function RoomGridPage() {
   return (
     <div className="w-screen bg-[#FAF3E1] h-screen relative overflow-hidden">
-      
-      {/* UI Layer (Outside Canvas) */}
+   
       <div className="absolute top-10  right-11 w-full z-50">
         <Navbar />
       </div>
 
-      {/* 3D Layer */}
+ 
       <Canvas
         camera={{
           position: [200, 200, 360],
