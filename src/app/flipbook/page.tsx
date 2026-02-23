@@ -4,109 +4,44 @@ import React from "react";
 import HTMLFlipBook from "react-pageflip";
 
 
-const Cover = React.forwardRef<
-  HTMLDivElement,
-  { children: React.ReactNode; isBack?: boolean }
->(({ children, isBack = false }, ref) => {
-  return (
-    <div
-      ref={ref}
-      data-density="hard"
-      className={`w-[600px] h-[600px] flex items-center justify-center
-        ${
-          isBack
-            ? "bg-[#] text-black"
-            : "bg-[#0eaab5] text-white"
-        }`}
-      style={{ boxShadow: "0 10px 30px rgba(0,0,0,0.4)" }}
-    >
-      <p className="text-5xl font-bold tracking-wider mt-70 text-center">
-        {children}
-        </p>
-      </div>
-  );
-});
 
-Cover.displayName = "Cover";
+type CoverProps = {
+  text: string;
+  isBack?: boolean;
+};
 
+type PageProps = {
+  number: number ;
 
-const Page = React.forwardRef<
-  HTMLDivElement,
-  { number: number; title: string; children: React.ReactNode }
->(({ number, title, children }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className="w-[600px] h-[600px] bg-[#faf8f2] text-neutral-900 flex flex-col relative rounded-sm"
-      style={{
-        boxShadow:
-          "inset 0 0 40px rgba(0,0,0,0.05), 0 8px 20px rgba(0,0,0,0.25)",
-      }}
-    >
-      {/* Notebook binding margin */}
-      <div className="absolute left-0 top-0 bottom-0 w-14 bg-[#f0ece2]" />
+  title: string;
+  content: React.ReactNode;
+};
 
-      {/* Inner fold shadow */}
-      <div
-        className="absolute left-14 top-0 bottom-0 w-[2px]"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0.02))",
-        }}
-      />
+type FlipBookData = {
+  frontCover: CoverProps;
+  pages: PageProps[];
+  backCover: CoverProps;
+};
 
-      <div className="flex-1 pl-20 pr-10 pt-14 pb-12 text-[15px] leading-7 font-serif">
-        <h1 className="text-xl font-semibold mb-6 tracking-wide">
-          {title}
-        </h1>
-
-        <div className="text-neutral-800">{children}</div>
-      </div>
-
-      {/* Page number */}
-      <div className="absolute bottom-6 right-8 text-xs text-neutral-500 tracking-wide">
-        {number}
-      </div>
-    </div>
-  );
-});
-
-Page.displayName = "Page";
-
-
-
-export default function Home() {
-  return (
-    <main className="h-screen w-screen bg-black flex items-center justify-center p-4">
-      <HTMLFlipBook
-        width={600}
-        height={600}
-        size="fixed"
-        minWidth={400}
-        maxWidth={1000}
-        minHeight={400}
-        maxHeight={1000}
-        drawShadow={true}
-        flippingTime={800}
-        usePortrait={true}
-        startPage={0}
-        showCover={true}
-        maxShadowOpacity={0.5}
-        mobileScrollSupport={true}
-        swipeDistance={30}
-        useMouseEvents={true}
-      >
-
-        <Cover>Introduction</Cover>
-
-        {/* Pages */}
-        <Page number={1} title="Welcome">
-          <div className="w-full h-full bg-blue-500/20 rounded-lg flex items-center justify-center text-6xl font-bold text-blue-800">
-            Go
-          </div>
-        </Page>
-
-        <Page number={2} title="About the Project">
+const BOOK_DATA: FlipBookData = {
+  frontCover: {
+    text: "Introduction",
+  },
+  pages: [
+    {
+      number: 1,
+      title: "Welcome",
+      content: (
+        <div className="w-full h-full bg-blue-500/20 rounded-lg flex items-center justify-center text-6xl font-bold text-blue-800">
+          Go
+        </div>
+      ),
+    },
+    {
+      number: 2,
+      title: "About the Project",
+      content: (
+        <>
           <p>
             This project focuses on building a modern digital flipbook with
             smooth animations and real HTML content.
@@ -117,9 +52,14 @@ export default function Home() {
             <li>Supports 30–40+ pages</li>
             <li>Fully customizable content</li>
           </ul>
-        </Page>
-
-        <Page number={3} title="Use Cases">
+        </>
+      ),
+    },
+    {
+      number: 3,
+      title: "Use Cases",
+      content: (
+        <>
           <p>Flipbooks are great for:</p>
           <ol className="list-decimal pl-5 mt-4 space-y-2">
             <li>Portfolio presentations</li>
@@ -127,24 +67,120 @@ export default function Home() {
             <li>Product documentation</li>
             <li>Interactive storytelling</li>
           </ol>
-          <p className="mt-6">
-            Because it's real HTML/CSS, you can embed images, videos, forms,
-            interactive charts — anything.
-          </p>
-        </Page>
+        </>
+      ),
+    },
+    {
+      number: 4,
+      title: "Next Steps",
+      content: (
+        <ul className="list-disc pl-5 mt-4 space-y-2">
+          <li>Dynamic pages from array / CMS</li>
+          <li>Custom page transitions & sounds</li>
+          <li>Navigation controls</li>
+          <li>Page tracking & progress bar</li>
+          <li>Responsive adjustments</li>
+        </ul>
+      ),
+    },
+  ],
+  backCover: {
+    text: "End — Thanks for reading!",
+    isBack: true,
+  },
+};
 
-        <Page number={4} title="Next Steps">
-          <p>Easy ways to level up this flipbook:</p>
-          <ul className="list-disc pl-5 mt-4 space-y-2">
-            <li>Dynamic pages from array / CMS</li>
-            <li>Custom page transitions & sounds</li>
-            <li>Navigation controls</li>
-            <li>Page tracking & progress bar</li>
-            <li>Responsive adjustments</li>
-          </ul>
-        </Page>
 
-        <Cover isBack>End — Thanks for reading!</Cover>
+
+const Cover = React.forwardRef<HTMLDivElement, CoverProps>(
+  ({ text, isBack = false }, ref) => {
+    return (
+      <div
+        ref={ref}
+        data-density="hard"
+        className={`w-[600px] h-[600px] flex items-center justify-center
+          ${isBack ? "bg-neutral-200 text-black" : "bg-[#0eaab5] text-white"}`}
+        style={{ boxShadow: "0 10px 30px rgba(0,0,0,0.4)" }}
+      >
+        <p className="text-5xl font-bold tracking-wider text-center px-8">
+          {text}
+        </p>
+      </div>
+    );
+  }
+);
+
+Cover.displayName = "Cover";
+
+
+const Page = React.forwardRef<HTMLDivElement, PageProps>(
+  ({ number, title, content }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className="w-[600px] h-[600px] bg-[#faf8f2] text-neutral-900 flex flex-col relative rounded-sm"
+        style={{
+          boxShadow:
+            "inset 0 0 40px rgba(0,0,0,0.05), 0 8px 20px rgba(0,0,0,0.25)",
+        }}
+      >
+        {/* Binding margin */}
+        <div className="absolute left-0 top-0 bottom-0 w-14 bg-[#f0ece2]" />
+
+        {/* Inner fold shadow */}
+        <div
+          className="absolute left-14 top-0 bottom-0 w-[2px]"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0.02))",
+          }}
+        />
+
+        <div className="flex-1 pl-20 pr-10 pt-14 pb-12 text-[15px] leading-7 font-serif">
+          <h1 className="text-xl font-semibold mb-6 tracking-wide">
+            {title}
+          </h1>
+
+          <div className="text-neutral-800">{content}</div>
+        </div>
+
+        <div className="absolute bottom-6 right-8 text-xs text-neutral-500 tracking-wide">
+          {number}
+        </div>
+      </div>
+    );
+  }
+);
+
+Page.displayName = "Page";
+
+
+export default function Home() {
+  return (
+    <main className="h-screen w-screen bg-black flex items-center justify-center p-4">
+      <HTMLFlipBook
+        width={600}
+        height={600}
+        size="fixed"
+        drawShadow
+        flippingTime={800}
+        showCover
+        mobileScrollSupport
+      >
+  
+        <Cover {...BOOK_DATA.frontCover} />
+
+
+        {BOOK_DATA.pages.map((page) => (
+          <Page
+            key={page.number}
+            number={page.number}
+            title={page.title}
+            content={page.content}
+          />
+        ))}
+
+        <Cover {...BOOK_DATA.backCover} />
       </HTMLFlipBook>
     </main>
   );
