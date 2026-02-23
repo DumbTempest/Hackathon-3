@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import Navbar from "@/components/custom/navbar";
 
 function Model() {
   const { scene } = useGLTF("/models/model1.glb");
@@ -27,95 +28,7 @@ export default function Home() {
 
   return (
     <main className="h-screen w-full bg-[#FAF3E1] p-10 font-tektur overflow-hidden">
-      {status === 'authenticated' && (
-        <Link href="/login" passHref>
-          <Button
-            asChild
-            onClick={() => signOut({ callbackUrl: '/' })}
-            className="
-      bg-[#FF6D1F]
-      text-white
-      border-4 border-[#222222]
-      rounded-2xl
-      shadow-[6px_6px_0px_0px_#222222]
-      font-bold
-      px-10 py-5
-      active:translate-x-1
-      active:translate-y-1
-      active:shadow-none
-      transition-all
-    "
-          >
-            <a>Logout</a>
-          </Button>
-        </Link>
-      )}
-
-      {status === "unauthenticated" && (
-        <div className="flex justify-end gap-6 mb-6 mr-20">
-          <Link href="/room" passHref>
-            <Button
-              asChild
-              className="
-      bg-[#FF6D1F]
-      text-white
-      border-4 border-[#222222]
-      rounded-2xl
-      shadow-[6px_6px_0px_0px_#222222]
-      font-bold
-      px-10 py-5
-      active:translate-x-1
-      active:translate-y-1
-      active:shadow-none
-      transition-all
-    "
-            >
-              <a>Rooms</a>
-            </Button>
-          </Link>
-
-          <Button
-            asChild
-            onClick={() => signIn('google', { callbackUrl: '/' })}
-            className="
-      bg-[#FF6D1F]
-      text-white
-      border-4 border-[#222222]
-      rounded-2xl
-      shadow-[6px_6px_0px_0px_#222222]
-      font-bold
-      px-10 py-5
-      active:translate-x-1
-      active:translate-y-1
-      active:shadow-none
-      transition-all
-    "
-          >
-            <a>Login</a>
-          </Button>
-
-          <Button
-            asChild
-            onClick={() => signIn('google', { callbackUrl: '/' })}
-            className="
-      bg-[#FF6D1F]
-      text-white
-      border-4 border-[#222222]
-      rounded-2xl
-      shadow-[6px_6px_0px_0px_#222222]
-      font-bold
-      px-10 py-5
-      active:translate-x-1
-      active:translate-y-1
-      active:shadow-none
-      transition-all
-    "
-          >
-            <a>Signup</a>
-          </Button>
-        </div>
-      )
-      }
+    <Navbar/>
 
       {/* MAIN CONTENT */}
       <div className="grid grid-cols-2 gap-16 items-start">
@@ -142,31 +55,32 @@ export default function Home() {
             Explore, Learn, and Connect in a Virtual World of Books and Code.
           </p>
 
-          <Button
-            className="
-              bg-[#FF6D1F]
-              text-white
-              border-4 border-[#222222]
-              rounded-xl
-              shadow-[6px_6px_0px_0px_#222222]
-              font-bold
-              px-8 py-4
-              text-lg
-              active:translate-x-1
-              active:translate-y-1
-              active:shadow-none
-              transition-all
-            "
-          >
-            Enter
-          </Button>
+          <Link href="/room">
+            <Button
+              className="
+                bg-[#FF6D1F]
+                text-white
+                border-4 border-[#222222]
+                rounded-2xl
+                shadow-[6px_6px_0px_0px_#222222]
+                font-bold
+                px-10 py-5
+                active:translate-x-1
+                active:translate-y-1
+                active:shadow-none
+                transition-all
+              "
+            >
+              Start learning
+            </Button>
+          </Link>
         </Card>
 
         {/* RIGHT MODEL AREA */}
-        <div className="h-[650px] w-full relative">
+        <div className="h-[650px] w-full relative mt-0">
           <Canvas
             className="w-full h-full"
-            camera={{ position: [0, 2, 5], fov: 50 }}
+            camera={{ position: [3, 3, 4], fov: 50 , zoom: 0.9}}
           >
             <ambientLight intensity={1} />
             <directionalLight position={[5, 5, 5]} intensity={1.2} />
@@ -175,8 +89,14 @@ export default function Home() {
               <Model />
             </Suspense>
 
-            <OrbitControls enableZoom={false} />
+            <OrbitControls enableZoom={true} />
           </Canvas>
+          {/* <Image
+            src="/images/hero-image.png"
+            alt="Hero Image"
+            fill
+            className="object-contain"
+          /> */}
         </div>
 
       </div>

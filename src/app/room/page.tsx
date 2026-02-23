@@ -7,9 +7,12 @@ import {
   Clone,
   Text,
 } from "@react-three/drei";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import * as THREE from "three";
+import Navbar from "@/components/custom/navbar";
+
+/* ---------------- ROOM MODEL ---------------- */
 
 type RoomProps = {
   position: [number, number, number];
@@ -32,7 +35,6 @@ function RoomModel({
   const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
 
-  // Smooth hover scaling
   useFrame(() => {
     if (!groupRef.current) return;
 
@@ -71,10 +73,10 @@ function RoomModel({
         rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
         fontSize={4}
         font="/fonts/Tektur-VariableFont_wdth,wght.ttf"
-        color={hovered ? "#00ffff" : "white"}
+        color={hovered ? "#00ffff" : "black"}
         anchorX="center"
         anchorY="middle"
-        outlineWidth={0.2}
+        outlineWidth={0}
         outlineColor="black"
       >
         {label}
@@ -82,6 +84,8 @@ function RoomModel({
     </group>
   );
 }
+
+/* ---------------- SCENE ---------------- */
 
 function Scene() {
   const modelScale = 3;
@@ -91,18 +95,21 @@ function Scene() {
 
   const rotation: [number, number, number] = [0, Math.PI / 2, 0];
 
-  const items = [
-    { label: "Web Dev", link: "/web-dev" },
-    { label: "AI / ML", link: "/ai-ml" },
-    { label: "Blockchain", link: "/blockchain" },
-    { label: "CyberSec", link: "/cybersec" },
-    { label: "Robotics", link: "/robotics" },
-    { label: "Cloud", link: "/cloud" },
-  ];
+  const items = useMemo(
+    () => [
+      { label: "Web Dev", link: "/web-dev" },
+      { label: "AI / ML", link: "/ai-ml" },
+      { label: "Blockchain", link: "/blockchain" },
+      { label: "CyberSec", link: "/cybersec" },
+      { label: "Robotics", link: "/robotics" },
+      { label: "Cloud", link: "/cloud" },
+    ],
+    []
+  );
 
   const models = [];
-  let index = 0;
 
+  let index = 0;
   for (let row = 0; row < 2; row++) {
     for (let col = 0; col < 3; col++) {
       const item = items[index++];
@@ -128,7 +135,6 @@ function Scene() {
     <>
       <ambientLight intensity={1} />
       <directionalLight position={[50, 80, 50]} intensity={2} />
-
       {models}
 
       <OrbitControls
@@ -143,14 +149,23 @@ function Scene() {
   );
 }
 
+/* ---------------- PAGE ---------------- */
+
 export default function RoomGridPage() {
   return (
-    <div className="w-screen h-screen bg-black">
+    <div className="w-screen bg-[#FAF3E1] h-screen relative overflow-hidden">
+      
+      {/* UI Layer (Outside Canvas) */}
+      <div className="absolute top-10  right-11 w-full z-50">
+        <Navbar />
+      </div>
+
+      {/* 3D Layer */}
       <Canvas
         camera={{
           position: [200, 200, 360],
           fov: 50,
-          zoom:1.7
+          zoom: 1.7,
         }}
       >
         <Suspense fallback={null}>
@@ -161,4 +176,5 @@ export default function RoomGridPage() {
   );
 }
 
+/* Preload model once */
 useGLTF.preload("/models/rooms.glb");
