@@ -168,7 +168,7 @@ export default function Home() {
     return (
         <main className="absolute h-screen w-screen bg-[#FAF3E1] overflow-hidden">
 
-            {/* Smart Back Button */}
+            
             <div className="absolute bottom-0 right-0 mb-10 mr-10 z-50">
                 <Button
                     onClick={handleSmartBack}
@@ -178,7 +178,7 @@ export default function Home() {
                 </Button>
             </div>
 
-            {/* Room Title Overlay */}
+         
             <div className="absolute top-6 left-8 z-50 pointer-events-none">
                 <h1 className="text-white text-3xl font-semibold tracking-wide drop-shadow-lg font-tektur">
                     {roomDisplayName}

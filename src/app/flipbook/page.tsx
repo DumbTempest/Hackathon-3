@@ -71,7 +71,6 @@ const Cover = React.forwardRef<HTMLDivElement, CoverProps>(
 
 Cover.displayName = "Cover";
 
-/* ================= PAGE ================= */
 
 const Page = React.forwardRef<HTMLDivElement, PageProps>(
   ({ number, title, sections }, ref) => {
@@ -265,7 +264,7 @@ export default function Home({ bookId }: { bookId: string }) {
   return (
     <main className="h-screen w-screen bg-black flex items-center justify-center p-4 relative">
 
-      {/* TTS Controls */}
+  
       <div className="absolute top-6 right-33 z-50">
         {!speaking ? (
           <button
