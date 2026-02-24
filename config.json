@@ -1,0 +1,52 @@
+{
+    "group52911205-web-dev-4-0": {
+        "name": "JavaScript Foundations",
+        "description": "A beginner-friendly introduction to variables, functions, loops, and core JavaScript concepts.",
+        "author": "Alex Carter"
+    },
+    "group2019258969-web-dev-4-1": {
+        "name": "DOM Manipulation Guide",
+        "description": "Learn how to dynamically update web pages using the Document Object Model.",
+        "author": "Sophie Lin"
+    },
+    "group530783793-web-dev-4-2": {
+        "name": "Modern ES6+",
+        "description": "Explore arrow functions, destructuring, modules, and modern JavaScript patterns.",
+        "author": "Daniel Reed"
+    },
+    "group1952739294-web-dev-4-3": {
+        "name": "Async JavaScript",
+        "description": "Master promises, async/await, and asynchronous programming techniques.",
+        "author": "Maya Patel"
+    },
+    "group1085224916-web-dev-4-4": {
+        "name": "TypeScript Essentials",
+        "description": "Strong typing for scalable applications with practical TypeScript examples.",
+        "author": "Oliver Grant"
+    },
+    "group645472221-web-dev-4-5": {
+        "name": "Node.js Backend Basics",
+        "description": "Build REST APIs and backend services using Node.js and Express.",
+        "author": "Emma Brooks"
+    },
+    "group362314774-web-dev-4-6": {
+        "name": "React Fundamentals",
+        "description": "Understand components, hooks, state, and building dynamic UIs.",
+        "author": "Liam Foster"
+    },
+    "group416218763-web-dev-4-7": {
+        "name": "Next.js in Practice",
+        "description": "Server-side rendering, routing, and production-ready React apps.",
+        "author": "Noah Bennett"
+    },
+    "group114757839-web-dev-4-8": {
+        "name": "Advanced React Patterns",
+        "description": "Context, reducers, performance optimization, and architecture patterns.",
+        "author": "Ava Thompson"
+    },
+    "group1945462045-web-dev-4-9": {
+        "name": "Web Security Basics",
+        "description": "Protect applications from XSS, CSRF, and common vulnerabilities.",
+        "author": "Ethan Hayes"
+    }
+}

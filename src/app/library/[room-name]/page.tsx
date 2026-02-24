@@ -8,6 +8,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 import Flipbook from "../../flipbook/page";
+import BookIndexPanel from "@/components/custom/BookIndexPanel";
 
 /* ---------------- TECH STACK ---------------- */
 
@@ -206,6 +207,7 @@ export default function Home() {
                     maxZoom={250}
                 />
             </Canvas>
+            {selectedIndex !== null && <BookIndexPanel />}
 
             {/* ── Book panel — contained, not full-screen ── */}
             <AnimatePresence>

@@ -4,6 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Text } from "@react-three/drei";
 import { useMemo, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
+import BookIndexPanel from "./BookIndexPanel";
 
 // The bookshelf model group itself — never treat this as a book
 const SHELF_MODEL_GROUP = "group1295511530";
@@ -221,8 +222,8 @@ export default function Shelf({
     const bannerHeight = shelfHeight * 0.07; // thin strip
 
     // 🔥 Evenly distribute 4 rows
-    const bottomY = -shelfHeight / 2 + shelfHeight * 0.18;
-    const topY = shelfHeight / 2 - shelfHeight * 0.18;
+    const bottomY = -shelfHeight / 2 + shelfHeight * 0.16;
+    const topY = shelfHeight / 2 - shelfHeight * 0.19;
     const step = (topY - bottomY) / (ROW_LABELS.length - 1);
 
     ROW_LABELS.forEach((row, i) => {
@@ -377,7 +378,6 @@ export default function Shelf({
                 onPointerDown={selectedIndex !== null ? handleMeshClick : undefined}
             >
                 <primitive object={clonedScene} scale={2} rotation={[0, Math.PI, 0]} />
-
                 <Text
                     ref={textRef}
                     position={[0, 2, 0]}

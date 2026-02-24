@@ -31,7 +31,7 @@ export default function Navbar() {
               Rooms
             </Button>
           </Link>
-          <Link href="/room">
+          <Link href="/search">
             <Button
               className="
                 bg-[#FF6D1F]
