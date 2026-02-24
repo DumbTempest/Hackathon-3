@@ -12,6 +12,25 @@ export default function Navbar() {
       
       {status === "authenticated" && (
         <>
+        <Link href="/search">
+            <Button
+              className="
+                bg-[#FF6D1F]
+                text-white
+                border-4 border-[#222222]
+                rounded-2xl
+                shadow-[6px_6px_0px_0px_#222222]
+                font-bold
+                px-10 py-5
+                active:translate-x-1
+                active:translate-y-1
+                active:shadow-none
+                transition-all
+              "
+            >
+              Search
+            </Button>
+          </Link>
         <Link href="/room">
             <Button
               className="
@@ -31,25 +50,7 @@ export default function Navbar() {
               Rooms
             </Button>
           </Link>
-          <Link href="/room">
-            <Button
-              className="
-                bg-[#FF6D1F]
-                text-white
-                border-4 border-[#222222]
-                rounded-2xl
-                shadow-[6px_6px_0px_0px_#222222]
-                font-bold
-                px-10 py-5
-                active:translate-x-1
-                active:translate-y-1
-                active:shadow-none
-                transition-all
-              "
-            >
-              Search
-            </Button>
-          </Link>
+          
         <Button
           onClick={() => signOut({ callbackUrl: "/" })}
           className="
@@ -73,7 +74,7 @@ export default function Navbar() {
 
       {status === "unauthenticated" && (
         <>
-          <Link href="/room">
+          <Link href="/search">
             <Button
               className="
                 bg-[#FF6D1F]

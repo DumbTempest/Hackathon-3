@@ -1,16 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import Image from "next/image";
-
-
 
 type CoverProps = {
   title: string;
   subtitle?: string;
   author?: string;
-  coverImage?: string; // NEW
+  coverImage?: string;
   backgroundColor?: string;
   textColor?: string;
   isBack?: boolean;
@@ -51,7 +49,7 @@ const BOOK_DATA: FlipBookData = {
     title: "Go Programming",
     subtitle: "Beginner Guide",
     author: "Library Series",
-    coverImage: "/covers/go-cover.png", // 🔥 image instead of static color
+    coverImage: "/covers/go-cover.png",
   },
 
   pages: [
@@ -90,92 +88,6 @@ const BOOK_DATA: FlipBookData = {
         },
       ],
     },
-    {
-      number: 3,
-      title: "Your First Program",
-      sections: [
-        {
-          type: "highlight",
-          content: `package main
-
-import "fmt"
-
-func main() {
-  fmt.Println("Hello World")
-}`,
-        },
-      ],
-    },
-    {
-      number: 4,
-      title: "Variables & Types",
-      sections: [
-        {
-          type: "text",
-          content: "Go supports static typing with type inference.",
-        },
-        {
-          type: "highlight",
-          content: `var age int = 25
-name := "Arya"`,
-        },
-      ],
-    },
-    {
-      number: 5,
-      title: "Functions",
-      sections: [
-        {
-          type: "highlight",
-          content: `func add(a int, b int) int {
-  return a + b
-}`,
-        },
-      ],
-    },
-    {
-      number: 6,
-      title: "Control Flow",
-      sections: [
-        {
-          type: "list",
-          content: [
-            "if / else",
-            "switch",
-            "for loops",
-            "range keyword",
-          ],
-        },
-      ],
-    },
-    {
-      number: 7,
-      title: "Structs",
-      sections: [
-        {
-          type: "highlight",
-          content: `type User struct {
-  Name string
-  Age  int
-}`,
-        },
-      ],
-    },
-    {
-      number: 8,
-      title: "Next Steps",
-      sections: [
-        {
-          type: "list",
-          content: [
-            "Learn Goroutines",
-            "Understand Channels",
-            "Build APIs",
-            "Work with Databases",
-          ],
-        },
-      ],
-    },
   ],
 
   backCover: {
@@ -190,38 +102,25 @@ name := "Arya"`,
 
 
 const Cover = React.forwardRef<HTMLDivElement, CoverProps>(
-  (
-    {
-      title,
-      subtitle,
-      author,
-      coverImage,
-      backgroundColor = "#0eaab5",
-      textColor = "white",
-      isBack = false,
-    },
-    ref
-  ) => {
+  ({ title, subtitle, author, coverImage }, ref) => {
     return (
       <div
         ref={ref}
         data-density="hard"
         className="w-[600px] h-[600px] flex flex-col items-center justify-center relative"
         style={{
-          color: textColor,
           boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
         }}
       >
-        <Image 
+        <Image
           src={coverImage || "/covers/go-cover.png"}
           alt="Book Cover"
-          className="absolute inset-0 w-full h-full object-cover rounded"
-          width={32}
-          height={32}
+          fill
+          className="object-cover rounded"
         />
         <div className="bg-black/40 absolute inset-0" />
 
-        <div className="relative z-10 text-center px-8">
+        <div className="relative z-10 text-center px-8 text-white">
           <h1 className="text-5xl font-bold mb-4">{title}</h1>
           {subtitle && (
             <p className="text-xl opacity-90 mb-6">{subtitle}</p>
@@ -235,13 +134,14 @@ const Cover = React.forwardRef<HTMLDivElement, CoverProps>(
 
 Cover.displayName = "Cover";
 
+/* ================= PAGE ================= */
 
 const Page = React.forwardRef<HTMLDivElement, PageProps>(
   ({ number, title, sections }, ref) => {
     return (
       <div
         ref={ref}
-        className="w-[600px] h-[600px] bg-[#faf8f2] text-neutral-900 flex flex-col relative"
+        className="w-[600px] h-[800px] bg-[#faf8f2] text-neutral-900 flex flex-col relative"
       >
         <div className="absolute left-0 top-0 bottom-0 w-14 bg-[#f0ece2]" />
 
@@ -259,10 +159,7 @@ const Page = React.forwardRef<HTMLDivElement, PageProps>(
 
               case "list":
                 return (
-                  <ul
-                    key={idx}
-                    className="list-disc pl-5 mb-4 space-y-1"
-                  >
+                  <ul key={idx} className="list-disc pl-5 mb-4 space-y-1">
                     {section.content.map(
                       (item: string, i: number) => (
                         <li key={i}>{item}</li>
@@ -279,15 +176,6 @@ const Page = React.forwardRef<HTMLDivElement, PageProps>(
                   >
                     {section.content}
                   </pre>
-                );
-
-              case "image":
-                return (
-                  <img
-                    key={idx}
-                    src={section.content}
-                    className="rounded mb-4"
-                  />
                 );
 
               default:
@@ -308,16 +196,75 @@ Page.displayName = "Page";
 
 
 export default function Home() {
+  const flipBookRef = useRef<any>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [speaking, setSpeaking] = useState(false);
+
+  const speakCurrentPage = () => {
+    if (!flipBookRef.current) return;
+
+    const page = flipBookRef.current
+      .pageFlip()
+      .getPage(currentPage);
+
+    if (!page) return;
+
+    const text = page.element.innerText;
+    if (!text) return;
+
+    speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    utterance.onend = () => setSpeaking(false);
+
+    setSpeaking(true);
+    speechSynthesis.speak(utterance);
+  };
+
+  const stopSpeaking = () => {
+    speechSynthesis.cancel();
+    setSpeaking(false);
+  };
+
   return (
-    <main className="h-screen w-screen bg-black flex items-center justify-center p-4">
+    <main className="h-screen w-screen bg-black flex items-center justify-center p-4 relative">
+      
+      {/* TTS Controls */}
+      <div className="absolute top-6 right-6 z-50">
+        {!speaking ? (
+          <button
+            onClick={speakCurrentPage}
+            className="px-4 py-2 bg-yellow-400 text-black rounded-lg font-semibold"
+          >
+            🔊 Read Page
+          </button>
+        ) : (
+          <button
+            onClick={stopSpeaking}
+            className="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold"
+          >
+            ⏹ Stop
+          </button>
+        )}
+      </div>
+
       <HTMLFlipBook
+        ref={flipBookRef}
         width={600}
-        height={600}
+        height={700}
         size="fixed"
         drawShadow
         flippingTime={800}
         showCover
         mobileScrollSupport
+        onFlip={(e: any) => {
+          setCurrentPage(e.data);
+          speechSynthesis.cancel();
+          setSpeaking(false);
+        }}
       >
         <Cover {...BOOK_DATA.frontCover} />
 
