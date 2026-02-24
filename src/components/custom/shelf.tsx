@@ -68,6 +68,64 @@ export default function Shelf({
         return books;
     }, [clonedScene]);
 
+    useEffect(() => {
+    if (selectedIndex !== index) return;
+
+    bookGroups.forEach((group, i) => {
+        if (group.getObjectByName("binder-label")) return;
+
+        // --- Create canvas ---
+        const canvas = document.createElement("canvas");
+        canvas.width = 256;
+        canvas.height = 128;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 42px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Unknown", canvas.width / 2, canvas.height / 2);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.needsUpdate = true;
+
+        const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+        });
+
+        const geometry = new THREE.PlaneGeometry(0.35, 0.12);
+        const mesh = new THREE.Mesh(geometry, material);
+
+        mesh.name = "binder-label";
+
+        // 🔥 CRITICAL FIX:
+        // Put label slightly in FRONT of that specific book
+        mesh.position.set(0, 1, 1);
+
+        // Move outward along local Z axis
+        mesh.translateZ(0.5);
+
+        // Rotate to face outward
+        mesh.rotateY(Math.PI);
+
+        group.add(mesh);
+    });
+
+    return () => {
+        bookGroups.forEach((group) => {
+            const label = group.getObjectByName("binder-label");
+            if (label) group.remove(label);
+        });
+    };
+}, [selectedIndex, index, bookGroups]);
+
     /* ---------------- BOOK ANIMATION ---------------- */
 
     useFrame(() => {
@@ -136,11 +194,13 @@ export default function Shelf({
             const outer = groupRef.current?.getObjectByName(clickedName);
 
             if (inner && outer) {
+                const roomName = (window.location.pathname.split("/").pop() || "unknown-room")
+                    .replace(/\s+/g, "");
                 const parentGroup = outer.parent as THREE.Group;
                 const meshIndex = bookGroups.findIndex(
                     (g) => g.name === parentGroup.name
                 );
-                const generatedId = `${parentGroup.name}-default-${index}-${meshIndex}`;
+                const generatedId = `${parentGroup.name}-${roomName}-${index}-${meshIndex}`;
 
                 // Animate
                 setInnerMesh(inner);
@@ -173,7 +233,7 @@ export default function Shelf({
                     console.log("Opened Book ID:", generatedId);
                     console.log(
                         "All IDs on this shelf:",
-                        bookGroups.map((g, i) => `${g.name}-default-${index}-${i}`)
+                        bookGroups.map((g, i) => `${g.name}-${roomName}-${index}-${i}`)
                     );
                 }
             }

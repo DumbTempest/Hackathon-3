@@ -4,10 +4,10 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Suspense, useState, useEffect, useCallback } from "react";
 import Shelf from "@/components/custom/shelf";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
-import Flipbook from "../flipbook/page";
+import Flipbook from "../../flipbook/page";
 
 /* ---------------- TECH STACK ---------------- */
 
@@ -57,6 +57,23 @@ export default function Home() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
+    const pathname = usePathname();
+
+    const roomSlug = (() => {
+        if (!pathname) return "library";
+        const segments = pathname.split("/").filter(Boolean);
+        const last = segments[segments.length - 1];
+        return decodeURIComponent(last || "library");
+    })();
+
+    const roomDisplayName =
+        roomSlug === "library"
+            ? "Library"
+            : roomSlug
+                .split("-")
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(" ");
+
     const [overlayColor, setOverlayColor] = useState<string | null>(null);
     const [resetSignal, setResetSignal] = useState(0);
     const [activeBookId, setActiveBookId] = useState<string | null>(null);
@@ -84,7 +101,7 @@ export default function Home() {
 
     const handleSelect = (index: number) => {
         setSelectedIndex(index);
-        router.push(`/library?shelf=${index + 1}`);
+        router.push(`/library/${roomSlug}?shelf=${index + 1}`);
     };
 
     // Called by Shelf when a book is opened — adds bookId to URL
@@ -93,10 +110,10 @@ export default function Home() {
             setOverlayColor(color);
             setActiveBookId(bookId);
             if (shelfFromUrl) {
-                router.push(`/library?shelf=${shelfFromUrl}&bookId=${bookId}`);
+                router.push(`/library/${roomSlug}?shelf=${shelfFromUrl}&bookId=${bookId}`);
             }
         },
-        [shelfFromUrl, router]
+        [shelfFromUrl, roomSlug, router]
     );
 
     // Close book panel — goes back to shelf view
@@ -105,9 +122,9 @@ export default function Home() {
         setActiveBookId(null);
         setResetSignal((prev) => prev + 1);
         if (shelfFromUrl) {
-            router.push(`/library?shelf=${shelfFromUrl}`);
+            router.push(`/library/${roomSlug}?shelf=${shelfFromUrl}`);
         }
-    }, [shelfFromUrl, router]);
+    }, [shelfFromUrl, roomSlug, router]);
 
     // Full reset — back to library root
     const handleReset = useCallback(() => {
@@ -115,11 +132,18 @@ export default function Home() {
         setActiveBookId(null);
         setSelectedIndex(null);
         setResetSignal((prev) => prev + 1);
-        router.push(`/library`);
-    }, [router]);
+        router.push(`/library/${roomSlug}`);
+    }, [roomSlug, router]);
+    console.log(activeBookId)
 
     return (
         <main className="absolute h-screen w-screen bg-[#0f172a] overflow-hidden">
+            {/* ── Room Title Overlay ── */}
+            <div className="absolute top-6 left-8 z-50 pointer-events-none">
+                <h1 className="text-white text-3xl font-semibold tracking-wide drop-shadow-lg font-tektur">
+                    {roomDisplayName}
+                </h1>
+            </div>
             <Canvas
                 shadows
                 orthographic
@@ -229,7 +253,7 @@ export default function Home() {
 
                                 {/* Book content — swap on activeBookId */}
                                 <div className="w-full h-full">
-                                    {activeBookId === "group323163343-default-4-54" && (
+                                    {activeBookId === "group323163343-web-dev-4-54" && (
                                         <Flipbook />
                                     )}
                                     {/* Add more book ID mappings here */}
