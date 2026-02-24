@@ -1,11 +1,15 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import webDevData from "../../../config.json";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 export default function BookIndexPanel() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
 
   const bookId = searchParams.get("bookId");
   const shelf = searchParams.get("shelf");
@@ -25,6 +29,13 @@ export default function BookIndexPanel() {
     });
 
   if (shelfBooks.length === 0) return null;
+
+  const handleOpenBook = (id: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("bookId", id);
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   return (
     <motion.div
@@ -54,6 +65,7 @@ export default function BookIndexPanel() {
           return (
             <div
               key={id}
+              onClick={() => handleOpenBook(id)}
               className={`
                 p-4
                 rounded-2xl
