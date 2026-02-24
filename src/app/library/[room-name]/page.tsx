@@ -166,7 +166,7 @@ export default function Home() {
     : "Back to Rooms";
 
   return (
-    <main className="absolute h-screen w-screen bg-[#0f172a] overflow-hidden">
+    <main className="absolute h-screen w-screen bg-[#FAF3E1] overflow-hidden">
 
       {/* Smart Back Button */}
       <div className="absolute bottom-0 right-0 mb-10 mr-10 z-50">
