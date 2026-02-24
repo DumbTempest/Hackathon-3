@@ -114,7 +114,7 @@ export default function Shelf({
         return clone;
     }, [scene]);
 
-    /* ---------------- MEMOIZE BOOK GROUPS ---------------- */
+   
 
     const bookGroups = useMemo(() => {
         const books: THREE.Group[] = [];
@@ -136,12 +136,11 @@ export default function Shelf({
         bookGroups.forEach((group) => {
             if (group.getObjectByName("binder-label")) return;
 
-            // 🔥 Compute bounding box of THIS book
             const box = new THREE.Box3().setFromObject(group);
             const size = new THREE.Vector3();
             box.getSize(size);
 
-            // --- Canvas ---
+   
             const canvas = document.createElement("canvas");
             canvas.width = 256;
             canvas.height = 512;
@@ -170,7 +169,7 @@ export default function Shelf({
                 side: THREE.DoubleSide,
             });
 
-            // Scale label relative to book height
+   
             const geometry = new THREE.PlaneGeometry(
                 size.x * 0.6,
                 size.y * 0.6
@@ -179,10 +178,10 @@ export default function Shelf({
             const labelMesh = new THREE.Mesh(geometry, material);
             labelMesh.name = "binder-label";
 
-            // 🔥 Add to BOOK GROUP (not mesh)
+         
             group.add(labelMesh);
 
-            // 🔥 Position on spine using bounding box
+           
             labelMesh.position.set(
                 0,
                 0,
@@ -208,7 +207,6 @@ export default function Shelf({
 
     while (bg.children.length) bg.remove(bg.children[0]);
 
-    // 🔥 Get shelf bounding box
     const shelfBox = new THREE.Box3().setFromObject(groupRef.current);
     const shelfSize = new THREE.Vector3();
     shelfBox.getSize(shelfSize);
@@ -217,11 +215,10 @@ export default function Shelf({
     const shelfHeight = shelfSize.y;
     const shelfDepth = shelfSize.z;
 
-    // 🔥 Banner dimensions (clean proportions)
-    const bannerWidth = shelfWidth * 0.8;  // 85% width
-    const bannerHeight = shelfHeight * 0.07; // thin strip
+    const bannerWidth = shelfWidth * 0.8;  
+    const bannerHeight = shelfHeight * 0.07; 
 
-    // 🔥 Evenly distribute 4 rows
+    
     const bottomY = -shelfHeight / 2 + shelfHeight * 0.16;
     const topY = shelfHeight / 2 - shelfHeight * 0.19;
     const step = (topY - bottomY) / (ROW_LABELS.length - 1);
@@ -234,10 +231,10 @@ export default function Shelf({
             bannerWidth
         );
 
-        // 🔥 Scale height properly
+        
         banner.scale.y = bannerHeight / banner.geometry.parameters.height;
 
-        // 🔥 Position
+       
         banner.position.set(
             0,
             bottomY + step * i,
@@ -252,7 +249,7 @@ export default function Shelf({
     };
 }, [selectedIndex, index]);
 
-    /* ---------------- BOOK ANIMATION ---------------- */
+
 
     useFrame(() => {
         if (innerMesh && outerMesh && originalTransforms.current.inner) {
@@ -286,8 +283,6 @@ export default function Shelf({
         }
     });
 
-    /* ---------------- RESET ON SIGNAL ---------------- */
-
     useEffect(() => {
         if (
             originalTransforms.current.inner &&
@@ -306,7 +301,6 @@ export default function Shelf({
         }
     }, [resetSignal]);
 
-    /* ---------------- CLICK HANDLER ---------------- */
 
     const handleMeshClick = (e: any) => {
         e.stopPropagation();

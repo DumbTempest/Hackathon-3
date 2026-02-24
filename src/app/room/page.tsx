@@ -38,15 +38,20 @@ function RoomModel({
   const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!groupRef.current) return;
 
+    /* Hover scale */
     const targetScale = hovered && !disabled ? scale * 1.08 : scale;
 
     groupRef.current.scale.lerp(
       new THREE.Vector3(targetScale, targetScale, targetScale),
       0.1
     );
+
+    /* Floating motion */
+    groupRef.current.position.y =
+      position[1] + Math.sin(state.clock.elapsedTime * 1.2) * 2;
   });
 
   return (
@@ -94,8 +99,13 @@ function CameraController({
 }) {
   const { camera } = useThree();
 
-  useFrame(() => {
-    if (!target) return;
+  useFrame((state) => {
+    if (!target) {
+      /* Idle cinematic drift */
+      camera.position.x += Math.sin(state.clock.elapsedTime * 0.3) * 0.05;
+      camera.position.y += Math.cos(state.clock.elapsedTime * 0.2) * 0.05;
+      return;
+    }
 
     const desiredPosition = new THREE.Vector3(
       target.x,
@@ -205,16 +215,27 @@ export default function RoomGridPage() {
   };
 
   return (
-    <div className="w-screen bg-[#FAF3E1] h-screen relative overflow-hidden">
-      <div className="absolute top-10 right-11 w-full z-50">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="w-screen bg-[#FAF3E1] h-screen relative overflow-hidden"
+    >
+      {/* NAVBAR ANIMATION */}
+      <motion.div
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="absolute top-10 right-11 w-full z-50"
+      >
         <Navbar />
-      </div>
+      </motion.div>
 
       <Canvas
         camera={{
           position: [200, 200, 360],
           fov: 50,
-          zoom:1.8
+          zoom: 1.8,
         }}
       >
         <Suspense fallback={null}>
@@ -229,6 +250,7 @@ export default function RoomGridPage() {
         </Suspense>
       </Canvas>
 
+      {/* FADE OUT TRANSITION */}
       <AnimatePresence>
         {fade && (
           <motion.div
@@ -242,7 +264,7 @@ export default function RoomGridPage() {
           />
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 

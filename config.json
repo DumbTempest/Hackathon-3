@@ -398,5 +398,1211 @@
                 ]
             }
         ]
-    }
+    },
+  "group921219821-web-dev-1-48": {
+    "name": "JavaScript Foundations",
+    "description": "A beginner-friendly introduction to variables, functions, loops, and core JavaScript concepts.",
+    "author": "Alex Carter",
+    "pages": [
+      {
+        "title": "Introduction to JavaScript",
+        "sections": [
+          { "type": "text", "content": "JavaScript powers interactive web experiences." },
+          { "type": "list", "content": ["Runs in browser", "Dynamic typing", "Event-driven", "Flexible syntax"] }
+        ]
+      },
+      {
+        "title": "Variables & Types",
+        "sections": [
+          { "type": "highlight", "content": "let age = 25;" },
+          { "type": "text", "content": "JS supports string, number, boolean, null, undefined, and objects." }
+        ]
+      },
+      {
+        "title": "Functions",
+        "sections": [
+          { "type": "highlight", "content": "function greet(name){ return 'Hi ' + name }" }
+        ]
+      },
+      {
+        "title": "Control Flow",
+        "sections": [
+          { "type": "highlight", "content": "if(condition){ ... } else { ... }" }
+        ]
+      }
+    ]
+  },
+  "group1688433415-web-dev-1-49": {
+    "name": "DOM Manipulation Guide",
+    "description": "Learn how to dynamically update web pages using the Document Object Model.",
+    "author": "Sophie Lin",
+    "pages": [
+      {
+        "title": "What is the DOM?",
+        "sections": [
+          { "type": "text", "content": "The DOM represents HTML as a structured tree." }
+        ]
+      },
+      {
+        "title": "Selecting Elements",
+        "sections": [
+          { "type": "highlight", "content": "document.querySelector('#id')" }
+        ]
+      },
+      {
+        "title": "Updating Content",
+        "sections": [
+          { "type": "highlight", "content": "element.innerText = 'Updated'" }
+        ]
+      },
+      {
+        "title": "Event Handling",
+        "sections": [
+          { "type": "highlight", "content": "button.addEventListener('click', handler)" }
+        ]
+      }
+    ]
+  },
+  "group660775291-web-dev-1-50": {
+    "name": "Modern ES6+",
+    "description": "Explore arrow functions, destructuring, modules, and modern JavaScript patterns.",
+    "author": "Daniel Reed",
+    "pages": [
+      {
+        "title": "Arrow Functions",
+        "sections": [
+          { "type": "highlight", "content": "const add = (a,b) => a+b;" }
+        ]
+      },
+      {
+        "title": "Destructuring",
+        "sections": [
+          { "type": "highlight", "content": "const {name} = user;" }
+        ]
+      },
+      {
+        "title": "Spread Operator",
+        "sections": [
+          { "type": "highlight", "content": "const newArr = [...arr];" }
+        ]
+      },
+      {
+        "title": "Modules",
+        "sections": [
+          { "type": "highlight", "content": "export default function App(){}" }
+        ]
+      }
+    ]
+  },
+  "group849927048-web-dev-1-51": {
+    "name": "Async JavaScript",
+    "description": "Master promises, async/await, and asynchronous programming techniques.",
+    "author": "Maya Patel",
+    "pages": [
+      {
+        "title": "Callbacks",
+        "sections": [
+          { "type": "text", "content": "Callbacks execute after async operations." }
+        ]
+      },
+      {
+        "title": "Promises",
+        "sections": [
+          { "type": "highlight", "content": "fetch(url).then(res => res.json())" }
+        ]
+      },
+      {
+        "title": "Async/Await",
+        "sections": [
+          { "type": "highlight", "content": "const data = await fetch(url);" }
+        ]
+      },
+      {
+        "title": "Error Handling",
+        "sections": [
+          { "type": "highlight", "content": "try { } catch(err) { }" }
+        ]
+      }
+    ]
+  },
+  "group1990887317-web-dev-1-52": {
+    "name": "TypeScript Essentials",
+    "description": "Strong typing for scalable applications with practical TypeScript examples.",
+    "author": "Oliver Grant",
+    "pages": [
+      {
+        "title": "Why TypeScript?",
+        "sections": [
+          { "type": "text", "content": "Adds static typing to JavaScript." }
+        ]
+      },
+      {
+        "title": "Interfaces",
+        "sections": [
+          { "type": "highlight", "content": "interface User { name: string }" }
+        ]
+      },
+      {
+        "title": "Generics",
+        "sections": [
+          { "type": "highlight", "content": "function identity<T>(arg:T):T{}" }
+        ]
+      },
+      {
+        "title": "Type Safety",
+        "sections": [
+          { "type": "text", "content": "Prevents runtime errors and improves tooling." }
+        ]
+      }
+    ]
+  },
+  "group898475564-web-dev-1-53": {
+    "name": "Node.js Backend Basics",
+    "description": "Build REST APIs and backend services using Node.js and Express.",
+    "author": "Emma Brooks",
+    "pages": [
+      {
+        "title": "What is Node?",
+        "sections": [
+          { "type": "text", "content": "Node.js runs JS outside the browser." }
+        ]
+      },
+      {
+        "title": "Express Setup",
+        "sections": [
+          { "type": "highlight", "content": "const app = require('express')();" }
+        ]
+      },
+      {
+        "title": "Routing",
+        "sections": [
+          { "type": "highlight", "content": "app.get('/users', handler)" }
+        ]
+      },
+      {
+        "title": "Middleware",
+        "sections": [
+          { "type": "text", "content": "Functions that run between request and response." }
+        ]
+      }
+    ]
+  },
+  "group323163343-web-dev-1-54": {
+    "name": "React Fundamentals",
+    "description": "Understand components, hooks, state, and building dynamic UIs.",
+    "author": "Liam Foster",
+    "pages": [
+      {
+        "title": "Components",
+        "sections": [
+          { "type": "text", "content": "Reusable building blocks of UI." }
+        ]
+      },
+      {
+        "title": "State",
+        "sections": [
+          { "type": "highlight", "content": "const [count,setCount] = useState(0);" }
+        ]
+      },
+      {
+        "title": "Props",
+        "sections": [
+          { "type": "text", "content": "Pass data between components." }
+        ]
+      },
+      {
+        "title": "Hooks",
+        "sections": [
+          { "type": "text", "content": "Special functions like useEffect." }
+        ]
+      }
+    ]
+  },
+  "group1437755864-web-dev-1-55": {
+    "name": "Next.js in Practice",
+    "description": "Server-side rendering, routing, and production-ready React apps.",
+    "author": "Noah Bennett",
+    "pages": [
+      {
+        "title": "File Routing",
+        "sections": [
+          { "type": "text", "content": "App Router enables nested routing." }
+        ]
+      },
+      {
+        "title": "SSR",
+        "sections": [
+          { "type": "text", "content": "Render pages on the server." }
+        ]
+      },
+      {
+        "title": "API Routes",
+        "sections": [
+          { "type": "highlight", "content": "export async function GET(){}" }
+        ]
+      },
+      {
+        "title": "Deployment",
+        "sections": [
+          { "type": "text", "content": "Deploy seamlessly on Vercel." }
+        ]
+      }
+    ]
+  },
+  "group1702643057-web-dev-1-56": {
+    "name": "Advanced React Patterns",
+    "description": "Context, reducers, performance optimization, and architecture patterns.",
+    "author": "Ava Thompson",
+    "pages": [
+      {
+        "title": "Context API",
+        "sections": [
+          { "type": "text", "content": "Share state globally across components." }
+        ]
+      },
+      {
+        "title": "Reducers",
+        "sections": [
+          { "type": "highlight", "content": "const [state,dispatch] = useReducer(reducer, init);" }
+        ]
+      },
+      {
+        "title": "Memoization",
+        "sections": [
+          { "type": "highlight", "content": "useMemo(() => compute(), []);" }
+        ]
+      },
+      {
+        "title": "Performance Optimization",
+        "sections": [
+          { "type": "text", "content": "Avoid unnecessary re-renders." }
+        ]
+      }
+    ]
+  },
+  "group921219821-web-dev-2-48": {
+    "name": "JavaScript Foundations",
+    "description": "A beginner-friendly introduction to variables, functions, loops, and core JavaScript concepts.",
+    "author": "Alex Carter",
+    "pages": [
+      {
+        "title": "Introduction to JavaScript",
+        "sections": [
+          { "type": "text", "content": "JavaScript powers interactive web experiences." },
+          { "type": "list", "content": ["Runs in browser", "Dynamic typing", "Event-driven", "Flexible syntax"] }
+        ]
+      },
+      {
+        "title": "Variables & Types",
+        "sections": [
+          { "type": "highlight", "content": "let age = 25;" },
+          { "type": "text", "content": "JS supports string, number, boolean, null, undefined, and objects." }
+        ]
+      },
+      {
+        "title": "Functions",
+        "sections": [
+          { "type": "highlight", "content": "function greet(name){ return 'Hi ' + name }" }
+        ]
+      },
+      {
+        "title": "Control Flow",
+        "sections": [
+          { "type": "highlight", "content": "if(condition){ ... } else { ... }" }
+        ]
+      }
+    ]
+  },
+  "group1688433415-web-dev-2-49": {
+    "name": "DOM Manipulation Guide",
+    "description": "Learn how to dynamically update web pages using the Document Object Model.",
+    "author": "Sophie Lin",
+    "pages": [
+      {
+        "title": "What is the DOM?",
+        "sections": [
+          { "type": "text", "content": "The DOM represents HTML as a structured tree." }
+        ]
+      },
+      {
+        "title": "Selecting Elements",
+        "sections": [
+          { "type": "highlight", "content": "document.querySelector('#id')" }
+        ]
+      },
+      {
+        "title": "Updating Content",
+        "sections": [
+          { "type": "highlight", "content": "element.innerText = 'Updated'" }
+        ]
+      },
+      {
+        "title": "Event Handling",
+        "sections": [
+          { "type": "highlight", "content": "button.addEventListener('click', handler)" }
+        ]
+      }
+    ]
+  },
+  "group660775291-web-dev-2-50": {
+    "name": "Modern ES6+",
+    "description": "Explore arrow functions, destructuring, modules, and modern JavaScript patterns.",
+    "author": "Daniel Reed",
+    "pages": [
+      {
+        "title": "Arrow Functions",
+        "sections": [
+          { "type": "highlight", "content": "const add = (a,b) => a+b;" }
+        ]
+      },
+      {
+        "title": "Destructuring",
+        "sections": [
+          { "type": "highlight", "content": "const {name} = user;" }
+        ]
+      },
+      {
+        "title": "Spread Operator",
+        "sections": [
+          { "type": "highlight", "content": "const newArr = [...arr];" }
+        ]
+      },
+      {
+        "title": "Modules",
+        "sections": [
+          { "type": "highlight", "content": "export default function App(){}" }
+        ]
+      }
+    ]
+  },
+  "group849927048-web-dev-2-51": {
+    "name": "Async JavaScript",
+    "description": "Master promises, async/await, and asynchronous programming techniques.",
+    "author": "Maya Patel",
+    "pages": [
+      {
+        "title": "Callbacks",
+        "sections": [
+          { "type": "text", "content": "Callbacks execute after async operations." }
+        ]
+      },
+      {
+        "title": "Promises",
+        "sections": [
+          { "type": "highlight", "content": "fetch(url).then(res => res.json())" }
+        ]
+      },
+      {
+        "title": "Async/Await",
+        "sections": [
+          { "type": "highlight", "content": "const data = await fetch(url);" }
+        ]
+      },
+      {
+        "title": "Error Handling",
+        "sections": [
+          { "type": "highlight", "content": "try { } catch(err) { }" }
+        ]
+      }
+    ]
+  },
+  "group1990887317-web-dev-2-52": {
+    "name": "TypeScript Essentials",
+    "description": "Strong typing for scalable applications with practical TypeScript examples.",
+    "author": "Oliver Grant",
+    "pages": [
+      {
+        "title": "Why TypeScript?",
+        "sections": [
+          { "type": "text", "content": "Adds static typing to JavaScript." }
+        ]
+      },
+      {
+        "title": "Interfaces",
+        "sections": [
+          { "type": "highlight", "content": "interface User { name: string }" }
+        ]
+      },
+      {
+        "title": "Generics",
+        "sections": [
+          { "type": "highlight", "content": "function identity<T>(arg:T):T{}" }
+        ]
+      },
+      {
+        "title": "Type Safety",
+        "sections": [
+          { "type": "text", "content": "Prevents runtime errors and improves tooling." }
+        ]
+      }
+    ]
+  },
+  "group898475564-web-dev-2-53": {
+    "name": "Node.js Backend Basics",
+    "description": "Build REST APIs and backend services using Node.js and Express.",
+    "author": "Emma Brooks",
+    "pages": [
+      {
+        "title": "What is Node?",
+        "sections": [
+          { "type": "text", "content": "Node.js runs JS outside the browser." }
+        ]
+      },
+      {
+        "title": "Express Setup",
+        "sections": [
+          { "type": "highlight", "content": "const app = require('express')();" }
+        ]
+      },
+      {
+        "title": "Routing",
+        "sections": [
+          { "type": "highlight", "content": "app.get('/users', handler)" }
+        ]
+      },
+      {
+        "title": "Middleware",
+        "sections": [
+          { "type": "text", "content": "Functions that run between request and response." }
+        ]
+      }
+    ]
+  },
+  "group323163343-web-dev-2-54": {
+    "name": "React Fundamentals",
+    "description": "Understand components, hooks, state, and building dynamic UIs.",
+    "author": "Liam Foster",
+    "pages": [
+      {
+        "title": "Components",
+        "sections": [
+          { "type": "text", "content": "Reusable building blocks of UI." }
+        ]
+      },
+      {
+        "title": "State",
+        "sections": [
+          { "type": "highlight", "content": "const [count,setCount] = useState(0);" }
+        ]
+      },
+      {
+        "title": "Props",
+        "sections": [
+          { "type": "text", "content": "Pass data between components." }
+        ]
+      },
+      {
+        "title": "Hooks",
+        "sections": [
+          { "type": "text", "content": "Special functions like useEffect." }
+        ]
+      }
+    ]
+  },
+  "group1437755864-web-dev-2-55": {
+    "name": "Next.js in Practice",
+    "description": "Server-side rendering, routing, and production-ready React apps.",
+    "author": "Noah Bennett",
+    "pages": [
+      {
+        "title": "File Routing",
+        "sections": [
+          { "type": "text", "content": "App Router enables nested routing." }
+        ]
+      },
+      {
+        "title": "SSR",
+        "sections": [
+          { "type": "text", "content": "Render pages on the server." }
+        ]
+      },
+      {
+        "title": "API Routes",
+        "sections": [
+          { "type": "highlight", "content": "export async function GET(){}" }
+        ]
+      },
+      {
+        "title": "Deployment",
+        "sections": [
+          { "type": "text", "content": "Deploy seamlessly on Vercel." }
+        ]
+      }
+    ]
+  },
+  "group1702643057-web-dev-2-56": {
+    "name": "Advanced React Patterns",
+    "description": "Context, reducers, performance optimization, and architecture patterns.",
+    "author": "Ava Thompson",
+    "pages": [
+      {
+        "title": "Context API",
+        "sections": [
+          { "type": "text", "content": "Share state globally across components." }
+        ]
+      },
+      {
+        "title": "Reducers",
+        "sections": [
+          { "type": "highlight", "content": "const [state,dispatch] = useReducer(reducer, init);" }
+        ]
+      },
+      {
+        "title": "Memoization",
+        "sections": [
+          { "type": "highlight", "content": "useMemo(() => compute(), []);" }
+        ]
+      },
+      {
+        "title": "Performance Optimization",
+        "sections": [
+          { "type": "text", "content": "Avoid unnecessary re-renders." }
+        ]
+      }
+    ]
+  },
+  "group921219821-web-dev-3-48": {
+    "name": "C++ Foundations",
+    "description": "A beginner-friendly introduction to variables, functions, loops, and core C++ concepts.",
+    "author": "Alex Carter",
+    "pages": [
+      {
+        "title": "Introduction to C++",
+        "sections": [
+          { "type": "text", "content": "C++ is a compiled, statically typed systems programming language." },
+          { "type": "list", "content": ["Compiled language", "Static typing", "Object-oriented + procedural", "High performance"] }
+        ]
+      },
+      {
+        "title": "Variables & Types",
+        "sections": [
+          { "type": "highlight", "content": "int age = 25;" },
+          { "type": "text", "content": "C++ supports int, double, char, bool, std::string, and user-defined types." }
+        ]
+      },
+      {
+        "title": "Functions",
+        "sections": [
+          { "type": "highlight", "content": "std::string greet(std::string name){ return \"Hi \" + name; }" }
+        ]
+      },
+      {
+        "title": "Control Flow",
+        "sections": [
+          { "type": "highlight", "content": "if(condition){ /* ... */ } else { /* ... */ }" }
+        ]
+      }
+    ]
+  },
+  "group1688433415-web-dev-3-49": {
+    "name": "Console I/O Guide",
+    "description": "Learn how to interact with users using standard input and output in C++.",
+    "author": "Sophie Lin",
+    "pages": [
+      {
+        "title": "Standard Output",
+        "sections": [
+          { "type": "highlight", "content": "std::cout << \"Hello World\" << std::endl;" }
+        ]
+      },
+      {
+        "title": "Standard Input",
+        "sections": [
+          { "type": "highlight", "content": "std::cin >> age;" }
+        ]
+      },
+      {
+        "title": "Including iostream",
+        "sections": [
+          { "type": "highlight", "content": "#include <iostream>" }
+        ]
+      }
+    ]
+  },
+  "group660775291-web-dev-3-50": {
+    "name": "Modern C++ (C++11+)",
+    "description": "Explore auto, lambda functions, smart pointers, and modern C++ patterns.",
+    "author": "Daniel Reed",
+    "pages": [
+      {
+        "title": "Auto Keyword",
+        "sections": [
+          { "type": "highlight", "content": "auto x = 10;" }
+        ]
+      },
+      {
+        "title": "Lambda Functions",
+        "sections": [
+          { "type": "highlight", "content": "auto add = [](int a, int b){ return a + b; };" }
+        ]
+      },
+      {
+        "title": "Smart Pointers",
+        "sections": [
+          { "type": "highlight", "content": "std::unique_ptr<int> ptr = std::make_unique<int>(5);" }
+        ]
+      }
+    ]
+  },
+  "group849927048-web-dev-3-51": {
+    "name": "Asynchronous Programming in C++",
+    "description": "Understand threads, futures, and async execution in C++.",
+    "author": "Maya Patel",
+    "pages": [
+      {
+        "title": "Threads",
+        "sections": [
+          { "type": "highlight", "content": "std::thread t(functionName);" }
+        ]
+      },
+      {
+        "title": "Async",
+        "sections": [
+          { "type": "highlight", "content": "auto result = std::async(std::launch::async, functionName);" }
+        ]
+      },
+      {
+        "title": "Mutex",
+        "sections": [
+          { "type": "highlight", "content": "std::mutex mtx;" }
+        ]
+      }
+    ]
+  },
+  "group1990887317-web-dev-3-52": {
+    "name": "Object-Oriented Programming in C++",
+    "description": "Classes, objects, inheritance, and polymorphism in C++.",
+    "author": "Oliver Grant",
+    "pages": [
+      {
+        "title": "Classes",
+        "sections": [
+          { "type": "highlight", "content": "class User { public: std::string name; };" }
+        ]
+      },
+      {
+        "title": "Constructors",
+        "sections": [
+          { "type": "highlight", "content": "User(std::string n) : name(n) {}" }
+        ]
+      },
+      {
+        "title": "Inheritance",
+        "sections": [
+          { "type": "highlight", "content": "class Admin : public User {};" }
+        ]
+      }
+    ]
+  },
+  "group898475564-web-dev-3-53": {
+    "name": "File Handling in C++",
+    "description": "Read and write files using fstream.",
+    "author": "Emma Brooks",
+    "pages": [
+      {
+        "title": "Writing to File",
+        "sections": [
+          { "type": "highlight", "content": "std::ofstream file(\"data.txt\");" }
+        ]
+      },
+      {
+        "title": "Reading from File",
+        "sections": [
+          { "type": "highlight", "content": "std::ifstream file(\"data.txt\");" }
+        ]
+      }
+    ]
+  },
+  "group323163343-web-dev-3-54": {
+    "name": "STL Fundamentals",
+    "description": "Learn about vectors, maps, and standard algorithms.",
+    "author": "Liam Foster",
+    "pages": [
+      {
+        "title": "Vector",
+        "sections": [
+          { "type": "highlight", "content": "std::vector<int> nums = {1,2,3};" }
+        ]
+      },
+      {
+        "title": "Map",
+        "sections": [
+          { "type": "highlight", "content": "std::map<std::string, int> scores;" }
+        ]
+      },
+      {
+        "title": "Algorithms",
+        "sections": [
+          { "type": "highlight", "content": "std::sort(nums.begin(), nums.end());" }
+        ]
+      }
+    ]
+  },
+  "group1437755864-web-dev-3-55": {
+    "name": "Memory Management",
+    "description": "Understand pointers, dynamic allocation, and RAII.",
+    "author": "Noah Bennett",
+    "pages": [
+      {
+        "title": "Pointers",
+        "sections": [
+          { "type": "highlight", "content": "int* ptr = new int(10);" }
+        ]
+      },
+      {
+        "title": "Delete",
+        "sections": [
+          { "type": "highlight", "content": "delete ptr;" }
+        ]
+      },
+      {
+        "title": "RAII",
+        "sections": [
+          { "type": "text", "content": "Resource Acquisition Is Initialization ensures safe memory handling." }
+        ]
+      }
+    ]
+  },
+  "group1702643057-web-dev-3-56": {
+    "name": "Advanced C++ Concepts",
+    "description": "Templates, constexpr, and performance optimization.",
+    "author": "Ava Thompson",
+    "pages": [
+      {
+        "title": "Templates",
+        "sections": [
+          { "type": "highlight", "content": "template<typename T> T add(T a, T b){ return a+b; }" }
+        ]
+      },
+      {
+        "title": "Constexpr",
+        "sections": [
+          { "type": "highlight", "content": "constexpr int square(int x){ return x*x; }" }
+        ]
+      },
+      {
+        "title": "Move Semantics",
+        "sections": [
+          { "type": "highlight", "content": "std::move(obj);" }
+        ]
+      }
+    ]
+  }, 
+  "group921219821-web-dev-4-48": {
+    "name": "Rust Foundations",
+    "description": "A beginner-friendly introduction to variables, functions, loops, and core Rust concepts.",
+    "author": "Alex Carter",
+    "pages": [
+      {
+        "title": "Introduction to Rust",
+        "sections": [
+          { "type": "text", "content": "Rust is a compiled, memory-safe systems programming language focused on safety and performance." },
+          { "type": "list", "content": ["Ownership model", "Memory safety without GC", "Zero-cost abstractions", "Strong static typing"] }
+        ]
+      },
+      {
+        "title": "Variables & Types",
+        "sections": [
+          { "type": "highlight", "content": "let age: i32 = 25;" },
+          { "type": "text", "content": "Rust supports i32, f64, bool, char, String, and custom structs." }
+        ]
+      },
+      {
+        "title": "Functions",
+        "sections": [
+          { "type": "highlight", "content": "fn greet(name: &str) -> String { format!(\"Hi {}\", name) }" }
+        ]
+      },
+      {
+        "title": "Control Flow",
+        "sections": [
+          { "type": "highlight", "content": "if condition { /* ... */ } else { /* ... */ }" }
+        ]
+      }
+    ]
+  },
+  "group1688433415-web-dev-4-49": {
+    "name": "Standard I/O in Rust",
+    "description": "Learn how to interact with users using Rust's standard input and output.",
+    "author": "Sophie Lin",
+    "pages": [
+      {
+        "title": "Printing to Console",
+        "sections": [
+          { "type": "highlight", "content": "println!(\"Hello, world!\");" }
+        ]
+      },
+      {
+        "title": "Reading Input",
+        "sections": [
+          { "type": "highlight", "content": "std::io::stdin().read_line(&mut input).unwrap();" }
+        ]
+      }
+    ]
+  },
+  "group660775291-web-dev-4-50": {
+    "name": "Modern Rust Concepts",
+    "description": "Explore pattern matching, enums, and traits in Rust.",
+    "author": "Daniel Reed",
+    "pages": [
+      {
+        "title": "Match Statement",
+        "sections": [
+          { "type": "highlight", "content": "match value { 1 => println!(\"One\"), _ => println!(\"Other\") }" }
+        ]
+      },
+      {
+        "title": "Enums",
+        "sections": [
+          { "type": "highlight", "content": "enum Role { Admin, User }" }
+        ]
+      },
+      {
+        "title": "Traits",
+        "sections": [
+          { "type": "highlight", "content": "trait Greet { fn greet(&self); }" }
+        ]
+      }
+    ]
+  },
+  "group849927048-web-dev-4-51": {
+    "name": "Concurrency in Rust",
+    "description": "Understand threads, ownership, and safe concurrency.",
+    "author": "Maya Patel",
+    "pages": [
+      {
+        "title": "Spawning Threads",
+        "sections": [
+          { "type": "highlight", "content": "std::thread::spawn(|| { println!(\"Hello from thread\"); });" }
+        ]
+      },
+      {
+        "title": "Channels",
+        "sections": [
+          { "type": "highlight", "content": "let (tx, rx) = std::sync::mpsc::channel();" }
+        ]
+      },
+      {
+        "title": "Mutex",
+        "sections": [
+          { "type": "highlight", "content": "let counter = std::sync::Mutex::new(0);" }
+        ]
+      }
+    ]
+  },
+  "group1990887317-web-dev-4-52": {
+    "name": "Structs and Ownership",
+    "description": "Understand structs, borrowing, and Rust’s ownership system.",
+    "author": "Oliver Grant",
+    "pages": [
+      {
+        "title": "Structs",
+        "sections": [
+          { "type": "highlight", "content": "struct User { name: String }" }
+        ]
+      },
+      {
+        "title": "Borrowing",
+        "sections": [
+          { "type": "highlight", "content": "fn print_name(name: &String) { println!(\"{}\", name); }" }
+        ]
+      },
+      {
+        "title": "Ownership",
+        "sections": [
+          { "type": "text", "content": "Each value in Rust has a single owner, ensuring memory safety at compile time." }
+        ]
+      }
+    ]
+  },
+  "group898475564-web-dev-4-53": {
+    "name": "File Handling in Rust",
+    "description": "Read and write files using Rust's standard library.",
+    "author": "Emma Brooks",
+    "pages": [
+      {
+        "title": "Writing to File",
+        "sections": [
+          { "type": "highlight", "content": "std::fs::write(\"data.txt\", \"Hello\").unwrap();" }
+        ]
+      },
+      {
+        "title": "Reading from File",
+        "sections": [
+          { "type": "highlight", "content": "let content = std::fs::read_to_string(\"data.txt\").unwrap();" }
+        ]
+      }
+    ]
+  },
+  "group323163343-web-dev-4-54": {
+    "name": "Collections in Rust",
+    "description": "Learn about vectors, hash maps, and iterators.",
+    "author": "Liam Foster",
+    "pages": [
+      {
+        "title": "Vector",
+        "sections": [
+          { "type": "highlight", "content": "let nums = vec![1, 2, 3];" }
+        ]
+      },
+      {
+        "title": "HashMap",
+        "sections": [
+          { "type": "highlight", "content": "use std::collections::HashMap;" }
+        ]
+      },
+      {
+        "title": "Iterators",
+        "sections": [
+          { "type": "highlight", "content": "for n in nums.iter() { println!(\"{}\", n); }" }
+        ]
+      }
+    ]
+  },
+  "group1437755864-web-dev-4-55": {
+    "name": "Error Handling",
+    "description": "Handle errors using Result and Option types.",
+    "author": "Noah Bennett",
+    "pages": [
+      {
+        "title": "Result",
+        "sections": [
+          { "type": "highlight", "content": "fn divide(a: i32, b: i32) -> Result<i32, String> { if b == 0 { Err(\"Cannot divide by zero\".to_string()) } else { Ok(a/b) } }" }
+        ]
+      },
+      {
+        "title": "Option",
+        "sections": [
+          { "type": "highlight", "content": "let value: Option<i32> = Some(5);" }
+        ]
+      }
+    ]
+  },
+  "group1702643057-web-dev-4-56": {
+    "name": "Advanced Rust Concepts",
+    "description": "Generics, lifetimes, and performance optimization.",
+    "author": "Ava Thompson",
+    "pages": [
+      {
+        "title": "Generics",
+        "sections": [
+          { "type": "highlight", "content": "fn add<T: std::ops::Add<Output=T>>(a: T, b: T) -> T { a + b }" }
+        ]
+      },
+      {
+        "title": "Lifetimes",
+        "sections": [
+          { "type": "highlight", "content": "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { if x.len() > y.len() { x } else { y } }" }
+        ]
+      },
+      {
+        "title": "Zero-Cost Abstractions",
+        "sections": [
+          { "type": "text", "content": "Rust abstractions compile down to highly optimized machine code with no runtime overhead." }
+        ]
+      }
+    ]
+  },
+  "group921219821-web-dev-5-48": {
+    "name": "Python Foundations",
+    "description": "A beginner-friendly introduction to variables, functions, loops, and core Python concepts.",
+    "author": "Alex Carter",
+    "pages": [
+      {
+        "title": "Introduction to Python",
+        "sections": [
+          { "type": "text", "content": "Python is an interpreted, high-level programming language known for readability and simplicity." },
+          { "type": "list", "content": ["Interpreted language", "Dynamic typing", "Indentation-based syntax", "Large standard library"] }
+        ]
+      },
+      {
+        "title": "Variables & Types",
+        "sections": [
+          { "type": "highlight", "content": "age = 25" },
+          { "type": "text", "content": "Python supports int, float, bool, str, list, tuple, dict, and custom classes." }
+        ]
+      },
+      {
+        "title": "Functions",
+        "sections": [
+          { "type": "highlight", "content": "def greet(name):\n    return f\"Hi {name}\"" }
+        ]
+      },
+      {
+        "title": "Control Flow",
+        "sections": [
+          { "type": "highlight", "content": "if condition:\n    pass\nelse:\n    pass" }
+        ]
+      }
+    ]
+  },
+  "group1688433415-web-dev-5-49": {
+    "name": "Input and Output in Python",
+    "description": "Learn how to interact with users using Python's input and print functions.",
+    "author": "Sophie Lin",
+    "pages": [
+      {
+        "title": "Printing Output",
+        "sections": [
+          { "type": "highlight", "content": "print(\"Hello, world!\")" }
+        ]
+      },
+      {
+        "title": "User Input",
+        "sections": [
+          { "type": "highlight", "content": "age = int(input(\"Enter age: \"))" }
+        ]
+      }
+    ]
+  },
+  "group660775291-web-dev-5-50": {
+    "name": "Modern Python Features",
+    "description": "Explore list comprehensions, lambda functions, and decorators.",
+    "author": "Daniel Reed",
+    "pages": [
+      {
+        "title": "List Comprehension",
+        "sections": [
+          { "type": "highlight", "content": "squares = [x*x for x in range(10)]" }
+        ]
+      },
+      {
+        "title": "Lambda Functions",
+        "sections": [
+          { "type": "highlight", "content": "add = lambda a, b: a + b" }
+        ]
+      },
+      {
+        "title": "Decorators",
+        "sections": [
+          { "type": "highlight", "content": "@decorator\ndef function():\n    pass" }
+        ]
+      }
+    ]
+  },
+  "group849927048-web-dev-5-51": {
+    "name": "Asynchronous Programming in Python",
+    "description": "Understand threading, multiprocessing, and async/await in Python.",
+    "author": "Maya Patel",
+    "pages": [
+      {
+        "title": "Threading",
+        "sections": [
+          { "type": "highlight", "content": "import threading\nt = threading.Thread(target=function)\nt.start()" }
+        ]
+      },
+      {
+        "title": "Async/Await",
+        "sections": [
+          { "type": "highlight", "content": "async def fetch():\n    await asyncio.sleep(1)" }
+        ]
+      }
+    ]
+  },
+  "group1990887317-web-dev-5-52": {
+    "name": "Object-Oriented Programming in Python",
+    "description": "Classes, inheritance, and polymorphism in Python.",
+    "author": "Oliver Grant",
+    "pages": [
+      {
+        "title": "Classes",
+        "sections": [
+          { "type": "highlight", "content": "class User:\n    def __init__(self, name):\n        self.name = name" }
+        ]
+      },
+      {
+        "title": "Inheritance",
+        "sections": [
+          { "type": "highlight", "content": "class Admin(User):\n    pass" }
+        ]
+      }
+    ]
+  },
+  "group898475564-web-dev-5-53": {
+    "name": "File Handling in Python",
+    "description": "Read and write files using Python's built-in functions.",
+    "author": "Emma Brooks",
+    "pages": [
+      {
+        "title": "Writing to File",
+        "sections": [
+          { "type": "highlight", "content": "with open('data.txt', 'w') as f:\n    f.write('Hello')" }
+        ]
+      },
+      {
+        "title": "Reading from File",
+        "sections": [
+          { "type": "highlight", "content": "with open('data.txt', 'r') as f:\n    content = f.read()" }
+        ]
+      }
+    ]
+  },
+  "group323163343-web-dev-5-54": {
+    "name": "Python Data Structures",
+    "description": "Learn about lists, dictionaries, sets, and tuples.",
+    "author": "Liam Foster",
+    "pages": [
+      {
+        "title": "List",
+        "sections": [
+          { "type": "highlight", "content": "nums = [1, 2, 3]" }
+        ]
+      },
+      {
+        "title": "Dictionary",
+        "sections": [
+          { "type": "highlight", "content": "scores = {'Alice': 90, 'Bob': 85}" }
+        ]
+      },
+      {
+        "title": "Set",
+        "sections": [
+          { "type": "highlight", "content": "unique = {1, 2, 3}" }
+        ]
+      }
+    ]
+  },
+  "group1437755864-web-dev-5-55": {
+    "name": "Error Handling in Python",
+    "description": "Handle exceptions using try and except blocks.",
+    "author": "Noah Bennett",
+    "pages": [
+      {
+        "title": "Try/Except",
+        "sections": [
+          { "type": "highlight", "content": "try:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    print('Cannot divide by zero')" }
+        ]
+      }
+    ]
+  },
+  "group1702643057-web-dev-5-56": {
+    "name": "Advanced Python Concepts",
+    "description": "Generators, context managers, and performance tips.",
+    "author": "Ava Thompson",
+    "pages": [
+      {
+        "title": "Generators",
+        "sections": [
+          { "type": "highlight", "content": "def gen():\n    yield 1" }
+        ]
+      },
+      {
+        "title": "Context Managers",
+        "sections": [
+          { "type": "highlight", "content": "with open('file.txt') as f:\n    pass" }
+        ]
+      },
+      {
+        "title": "Performance Optimization",
+        "sections": [
+          { "type": "text", "content": "Use built-in functions and avoid unnecessary loops for better performance." }
+        ]
+      }
+    ]
+  }
+
+
+
+
+
 }

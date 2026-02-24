@@ -12,7 +12,7 @@ export default function BookIndexPanel() {
 
     if (!shelf) return null;
 
-    // 🔥 Get only books from this shelf
+  
     const shelfBooks = Object.entries(webDevData)
         .filter(([id]) => {
             const parts = id.split("-");
