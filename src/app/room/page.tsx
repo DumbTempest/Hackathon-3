@@ -127,6 +127,7 @@ function Scene({
   const spacingX = 90;
   const spacingZ = 110;
   const globalOffsetX = -80;
+  const globalOffsetZ = -50;
   const rotation: [number, number, number] = [0, Math.PI / 2, 0];
 
   const items = useMemo(
@@ -151,7 +152,7 @@ function Scene({
       const position: [number, number, number] = [
         col * spacingX + globalOffsetX,
         0,
-        row * spacingZ,
+        row * spacingZ + globalOffsetZ,
       ];
 
       models.push(
@@ -213,6 +214,7 @@ export default function RoomGridPage() {
         camera={{
           position: [200, 200, 360],
           fov: 50,
+          zoom:1.8
         }}
       >
         <Suspense fallback={null}>
