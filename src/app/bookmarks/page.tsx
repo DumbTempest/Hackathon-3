@@ -27,7 +27,7 @@ export default function BookmarksPage() {
 
       <div className="grid grid-cols-2 gap-16 items-start">
 
-        {/* LEFT INFO CARD */}
+
         <Card
           className="
             bg-[#F5E7C6]
@@ -49,7 +49,6 @@ export default function BookmarksPage() {
           </p>
         </Card>
 
-        {/* RIGHT BOOKMARK LIST */}
         <div className="mt-20 space-y-6 max-h-[650px] overflow-y-auto pr-6 pb-4">
 
           {bookmarks.length === 0 && (

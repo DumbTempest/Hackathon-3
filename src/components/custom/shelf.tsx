@@ -6,10 +6,8 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import BookIndexPanel from "./BookIndexPanel";
 
-// The bookshelf model group itself — never treat this as a book
 const SHELF_MODEL_GROUP = "group1295511530";
 
-// 4 rows on each shelf, bottom → top
 const ROW_LABELS = [
     { label: "Misc",         color: "#94a3b8", textColor: "#1e293b" }, // slate
     { label: "Expert",       color: "#dc2626", textColor: "#ffffff" }, // red
@@ -30,7 +28,6 @@ function makeRowBannerMesh(
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Tinted rounded-rect background (~75% opacity)
     ctx.fillStyle = bgColor;
     ctx.globalAlpha = 0.75;
     const r = 14;
@@ -48,7 +45,6 @@ function makeRowBannerMesh(
     ctx.fill();
     ctx.globalAlpha = 1;
 
-    // Label text
     ctx.fillStyle = textColor;
     ctx.font = "bold 52px Arial";
     ctx.textAlign = "center";
@@ -58,7 +54,7 @@ function makeRowBannerMesh(
     const tex = new THREE.CanvasTexture(canvas);
     tex.needsUpdate = true;
 
-    const aspect = canvas.width / canvas.height;          // ~10.67
+    const aspect = canvas.width / canvas.height; 
     const h = worldWidth / aspect;
     const mesh = new THREE.Mesh(
         new THREE.PlaneGeometry(worldWidth, h),
@@ -83,7 +79,6 @@ export default function Shelf({
     index: number;
     selectedIndex: number | null;
     onClick: () => void;
-    /** Called when a book is opened — passes its generated ID and cover color */
     onBookOpen: (bookId: string, color: string) => void;
     label: string;
     labelColor: string;
@@ -188,7 +183,6 @@ export default function Shelf({
                 size.z + 0.01 // slightly outside front face
             );
 
-            // 🔥 Rotate like real binder
             labelMesh.rotation.y = Math.PI;
         });
 
@@ -322,7 +316,6 @@ export default function Shelf({
                 );
                 const generatedId = `${parentGroup.name}-${roomName}-${index}-${meshIndex}`;
 
-                // Animate
                 setInnerMesh(inner);
                 setOuterMesh(outer);
 
@@ -339,7 +332,6 @@ export default function Shelf({
                     };
                 }
 
-                // Derive cover color then notify parent
                 const material = (outer as any).material;
                 const hexColor = material?.color
                     ? `#${material.color.getHexString()}`

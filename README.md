@@ -1,38 +1,67 @@
-## Devrary
+# Devrary
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+> A Virtual Knowledge Library for Software Engineering  
+> Structured. Accessible. Free.
 
-## Getting Started
+---
 
-First, run the development server:
+## Overview
+
+Devrary is an interactive virtual library that organizes software engineering knowledge using a real-world library structure.
+
+Instead of endless scrolling and scattered resources, Devrary allows users to explore learning content spatially:
+
+- **Room → Domain** (Frontend, Backend, DevOps, AI/ML)
+- **Shelf → Programming Language / Technology**
+- **Book → Concept**
+- **Pages → Curated Learning Resources**
+
+The goal is to reduce cognitive overload and make learning structured, intuitive, and accessible.
+
+---
+
+## Tech Stack
+
+### Frontend
+- **Next.js**
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **Framer Motion** – Smooth animations and transitions
+- **Three.js** – 3D rendering engine
+- **@react-three/fiber** – React renderer for Three.js
+- **@react-three/drei** – Helpers and abstractions for Three.js
+
+### Backend
+- **MongoDB**
+
+### Tooling
+- Node.js
+- npm / pnpm
+- Git & GitHub
+
+---
+
+## 🚀 Getting Started
+
+Clone the repository and run the project locally:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/DumbTempest/Devrary.git
+cd Devrary
+pnpm install
+pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open your browser and visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Requirements
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Node.js 18+
+- npm / pnpm / yarn
