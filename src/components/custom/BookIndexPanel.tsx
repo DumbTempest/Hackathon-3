@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import webDevData from "../../../config.json";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function BookIndexPanel() {
   const searchParams = useSearchParams();
