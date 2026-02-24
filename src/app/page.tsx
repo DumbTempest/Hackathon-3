@@ -80,9 +80,10 @@ export default function Home() {
               </h1>
 
               <p className="text-xl mb-10 text-[#222222]">
-                Virtual Library for Book Lovers. Teaching Coding Concepts in a fun way.
-                Explore, Learn, and Connect in a Virtual World of Books and Code.
-              </p>
+  Discover coding concepts inside a structured virtual library. 
+  Walk through domains, browse languages, and open curated resources 
+  designed to make learning clear and accessible.
+</p>
 
               <Link href="/room">
                 <motion.div
