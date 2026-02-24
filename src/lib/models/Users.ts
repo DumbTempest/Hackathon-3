@@ -1,21 +1,15 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Schema, model, models, Model } from "mongoose";
 
-const TaskSchema = new Schema(
-  {
-    id: {
-      type: String,
-      required: true,
-    },
-    text: {
-      type: String,
-      required: true,
-      trim: true,
-    }
-  },
-  { _id: false }
-);
+export interface IUser {
+  email: string;
+  name: string;
+  profilePicture?: string;
+  bookmarks: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
-const UserSchema = new Schema(
+const UserSchema = new Schema<IUser>(
   {
     email: {
       type: String,
@@ -30,7 +24,8 @@ const UserSchema = new Schema(
       type: String,
       required: [true, "Name is required"],
       validate: {
-        validator: (val) => /^[a-z0-9_.]+$/.test(val),
+        validator: (val: string) =>
+          /^[a-z0-9_.]+$/.test(val),
         message:
           "Username can only contain lowercase letters, numbers, underscores, and periods",
       },
@@ -38,10 +33,15 @@ const UserSchema = new Schema(
     profilePicture: {
       type: String,
     },
-    bookmarks: [String]
+    bookmarks: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true }
 );
 
-const User = mongoose.models?.User || model("User", UserSchema);
+const User: Model<IUser> =
+  models.User || model<IUser>("User", UserSchema);
+
 export default User;

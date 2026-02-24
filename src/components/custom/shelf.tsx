@@ -91,7 +91,7 @@ export default function Shelf({
 }) {
     const { scene } = useGLTF("/models/model1.glb");
     const groupRef = useRef<THREE.Group>(null);
-    const textRef = useRef<any>();
+    const textRef = useRef<any>(null);
     const bannerGroupRef = useRef<THREE.Group>(null);
     const { camera } = useThree();
 

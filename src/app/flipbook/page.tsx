@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import HTMLFlipBook from "react-pageflip";
+import HTMLFlipBookBase from "react-pageflip";
+
+const HTMLFlipBook = HTMLFlipBookBase as any;
 import Image from "next/image";
 import booksData from "../../../config.json"
 

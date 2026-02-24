@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
-import HTMLFlipBook from "react-pageflip";
+import HTMLFlipBookBase from "react-pageflip";
+
+const HTMLFlipBook = HTMLFlipBookBase as any;
 
 
 
