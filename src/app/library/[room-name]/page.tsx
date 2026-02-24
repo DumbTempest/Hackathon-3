@@ -276,7 +276,7 @@ export default function Home() {
                             >
                                 <button
                                     onClick={handleBookClose}
-                                    className="absolute top-3 right-4 z-10 text-white/70 hover:text-white text-2xl font-light transition-colors"
+                                    className="absolute top-6 right-5 z-10 text-white/70 hover:text-white text-2xl font-light transition-colors"
                                     aria-label="Close book"
                                 >
                                     ✕

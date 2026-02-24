@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import HTMLFlipBook from "react-pageflip";
 import Image from "next/image";
 import booksData from "../../../config.json"
@@ -37,70 +37,6 @@ type FlipBookData = {
   pages: PageProps[];
   backCover: CoverProps;
 };
-
-const BOOK_DATA: FlipBookData = {
-  meta: {
-    id: "go-beginner-001",
-    category: "Go Programming",
-    level: "Beginner",
-    totalPages: 8,
-  },
-
-  frontCover: {
-    title: "Go Programming",
-    subtitle: "Beginner Guide",
-    author: "Library Series",
-    coverImage: "/covers/go-cover.png",
-  },
-
-  pages: [
-    {
-      number: 1,
-      title: "What is Go?",
-      sections: [
-        {
-          type: "text",
-          content:
-            "Go (Golang) is an open-source programming language designed by Google.",
-        },
-        {
-          type: "list",
-          content: [
-            "Statically typed",
-            "Compiled language",
-            "Built for concurrency",
-            "Fast and efficient",
-          ],
-        },
-      ],
-    },
-    {
-      number: 2,
-      title: "Installing Go",
-      sections: [
-        {
-          type: "text",
-          content:
-            "Download Go from the official website and follow installation instructions.",
-        },
-        {
-          type: "highlight",
-          content: "go version",
-        },
-      ],
-    },
-  ],
-
-  backCover: {
-    title: "End of Beginner Guide",
-    subtitle: "Continue to Intermediate Level",
-    isBack: true,
-    backgroundColor: "#e5e5e5",
-    textColor: "#111",
-  },
-};
-
-
 
 const Cover = React.forwardRef<HTMLDivElement, CoverProps>(
   ({ title, subtitle, author, coverImage }, ref) => {
@@ -197,6 +133,8 @@ Page.displayName = "Page";
 
 
 export default function Home({ bookId }: { bookId: string }) {
+  const [bookmarkLoading, setBookmarkLoading] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const bookMeta = booksData[bookId];
 
   if (!bookMeta) {
@@ -206,6 +144,29 @@ export default function Home({ bookId }: { bookId: string }) {
       </div>
     );
   }
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+    setIsBookmarked(stored.includes(bookId));
+  }, [bookId]);
+
+  const toggleBookmark = () => {
+    const stored = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+
+    let updated;
+
+    if (stored.includes(bookId)) {
+      // Remove bookmark
+      updated = stored.filter((id: string) => id !== bookId);
+      setIsBookmarked(false);
+    } else {
+      // Add bookmark
+      updated = [...stored, bookId];
+      setIsBookmarked(true);
+    }
+
+    localStorage.setItem("bookmarks", JSON.stringify(updated));
+  };
 
   const BOOK_DATA: FlipBookData = {
     meta: {
@@ -305,7 +266,7 @@ export default function Home({ bookId }: { bookId: string }) {
     <main className="h-screen w-screen bg-black flex items-center justify-center p-4 relative">
 
       {/* TTS Controls */}
-      <div className="absolute top-6 right-6 z-50">
+      <div className="absolute top-6 right-33 z-50">
         {!speaking ? (
           <button
             onClick={speakCurrentPage}
@@ -321,6 +282,17 @@ export default function Home({ bookId }: { bookId: string }) {
             ⏹ Stop
           </button>
         )}
+      </div>
+      <div className="absolute top-6 left-6 z-50">
+        <button
+          onClick={toggleBookmark}
+          className={`px-4 py-2 rounded-lg font-semibold transition ${isBookmarked
+              ? "bg-green-500 text-white"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
+        >
+          {isBookmarked ? "✅ Bookmarked" : "🔖 Add Bookmark"}
+        </button>
       </div>
 
       <HTMLFlipBook
