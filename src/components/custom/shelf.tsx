@@ -8,6 +8,66 @@ import * as THREE from "three";
 // The bookshelf model group itself — never treat this as a book
 const SHELF_MODEL_GROUP = "group1295511530";
 
+// 4 rows on each shelf, bottom → top
+const ROW_LABELS = [
+    { label: "Misc",         color: "#94a3b8", textColor: "#1e293b" }, // slate
+    { label: "Expert",       color: "#dc2626", textColor: "#ffffff" }, // red
+    { label: "Intermediate", color: "#d97706", textColor: "#ffffff" }, // amber
+    { label: "Beginner",     color: "#16a34a", textColor: "#ffffff" }, // green
+];
+
+function makeRowBannerMesh(
+    label: string,
+    bgColor: string,
+    textColor: string,
+    worldWidth = 5.5
+): THREE.Mesh {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1024;
+    canvas.height = 96;
+    const ctx = canvas.getContext("2d")!;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Tinted rounded-rect background (~75% opacity)
+    ctx.fillStyle = bgColor;
+    ctx.globalAlpha = 0.75;
+    const r = 14;
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.lineTo(canvas.width - r, 0);
+    ctx.arcTo(canvas.width, 0, canvas.width, r, r);
+    ctx.lineTo(canvas.width, canvas.height - r);
+    ctx.arcTo(canvas.width, canvas.height, canvas.width - r, canvas.height, r);
+    ctx.lineTo(r, canvas.height);
+    ctx.arcTo(0, canvas.height, 0, canvas.height - r, r);
+    ctx.lineTo(0, r);
+    ctx.arcTo(0, 0, r, 0, r);
+    ctx.closePath();
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Label text
+    ctx.fillStyle = textColor;
+    ctx.font = "bold 52px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(label, canvas.width / 2, canvas.height / 2);
+
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.needsUpdate = true;
+
+    const aspect = canvas.width / canvas.height;          // ~10.67
+    const h = worldWidth / aspect;
+    const mesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(worldWidth, h),
+        new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide, depthWrite: false })
+    );
+    mesh.name = "row-banner";
+    mesh.userData.isBanner = true;
+    return mesh;
+}
+
 export default function Shelf({
     position,
     index,
@@ -31,6 +91,7 @@ export default function Shelf({
     const { scene } = useGLTF("/models/model1.glb");
     const groupRef = useRef<THREE.Group>(null);
     const textRef = useRef<any>();
+    const bannerGroupRef = useRef<THREE.Group>(null);
     const { camera } = useThree();
 
     const [innerMesh, setInnerMesh] = useState<THREE.Object3D | null>(null);
@@ -69,62 +130,126 @@ export default function Shelf({
     }, [clonedScene]);
 
     useEffect(() => {
-    if (selectedIndex !== index) return;
+        if (selectedIndex !== index) return;
 
-    bookGroups.forEach((group, i) => {
-        if (group.getObjectByName("binder-label")) return;
+        bookGroups.forEach((group) => {
+            if (group.getObjectByName("binder-label")) return;
 
-        // --- Create canvas ---
-        const canvas = document.createElement("canvas");
-        canvas.width = 256;
-        canvas.height = 128;
+            // 🔥 Compute bounding box of THIS book
+            const box = new THREE.Box3().setFromObject(group);
+            const size = new THREE.Vector3();
+            box.getSize(size);
 
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+            // --- Canvas ---
+            const canvas = document.createElement("canvas");
+            canvas.width = 256;
+            canvas.height = 512;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return;
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 42px Arial";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("Unknown", canvas.width / 2, canvas.height / 2);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const texture = new THREE.CanvasTexture(canvas);
-        texture.needsUpdate = true;
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 60px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
 
-        const material = new THREE.MeshBasicMaterial({
-            map: texture,
-            transparent: true,
-            side: THREE.DoubleSide,
-            depthWrite: false,
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText("Unknown", 0, 0);
+            ctx.restore();
+
+            const texture = new THREE.CanvasTexture(canvas);
+
+            const material = new THREE.MeshBasicMaterial({
+                map: texture,
+                transparent: true,
+                side: THREE.DoubleSide,
+            });
+
+            // Scale label relative to book height
+            const geometry = new THREE.PlaneGeometry(
+                size.x * 0.6,
+                size.y * 0.6
+            );
+
+            const labelMesh = new THREE.Mesh(geometry, material);
+            labelMesh.name = "binder-label";
+
+            // 🔥 Add to BOOK GROUP (not mesh)
+            group.add(labelMesh);
+
+            // 🔥 Position on spine using bounding box
+            labelMesh.position.set(
+                0,
+                0,
+                size.z + 0.01 // slightly outside front face
+            );
+
+            // 🔥 Rotate like real binder
+            labelMesh.rotation.y = Math.PI;
         });
 
-        const geometry = new THREE.PlaneGeometry(0.35, 0.12);
-        const mesh = new THREE.Mesh(geometry, material);
+        return () => {
+            bookGroups.forEach((group) => {
+                const label = group.getObjectByName("binder-label");
+                if (label) group.remove(label);
+            });
+        };
+    }, [selectedIndex, index, bookGroups]);
 
-        mesh.name = "binder-label";
+    useEffect(() => {
+    if (selectedIndex !== index) return;
+    const bg = bannerGroupRef.current;
+    if (!bg || !groupRef.current) return;
 
-        // 🔥 CRITICAL FIX:
-        // Put label slightly in FRONT of that specific book
-        mesh.position.set(0, 1, 1);
+    while (bg.children.length) bg.remove(bg.children[0]);
 
-        // Move outward along local Z axis
-        mesh.translateZ(0.5);
+    // 🔥 Get shelf bounding box
+    const shelfBox = new THREE.Box3().setFromObject(groupRef.current);
+    const shelfSize = new THREE.Vector3();
+    shelfBox.getSize(shelfSize);
 
-        // Rotate to face outward
-        mesh.rotateY(Math.PI);
+    const shelfWidth = shelfSize.x;
+    const shelfHeight = shelfSize.y;
+    const shelfDepth = shelfSize.z;
 
-        group.add(mesh);
+    // 🔥 Banner dimensions (clean proportions)
+    const bannerWidth = shelfWidth * 0.8;  // 85% width
+    const bannerHeight = shelfHeight * 0.07; // thin strip
+
+    // 🔥 Evenly distribute 4 rows
+    const bottomY = -shelfHeight / 2 + shelfHeight * 0.18;
+    const topY = shelfHeight / 2 - shelfHeight * 0.18;
+    const step = (topY - bottomY) / (ROW_LABELS.length - 1);
+
+    ROW_LABELS.forEach((row, i) => {
+        const banner = makeRowBannerMesh(
+            row.label,
+            row.color,
+            row.textColor,
+            bannerWidth
+        );
+
+        // 🔥 Scale height properly
+        banner.scale.y = bannerHeight / banner.geometry.parameters.height;
+
+        // 🔥 Position
+        banner.position.set(
+            0,
+            bottomY + step * i,
+            shelfDepth / 2 + 0.05  // slight forward offset
+        );
+
+        bg.add(banner);
     });
 
     return () => {
-        bookGroups.forEach((group) => {
-            const label = group.getObjectByName("binder-label");
-            if (label) group.remove(label);
-        });
+        while (bg.children.length) bg.remove(bg.children[0]);
     };
-}, [selectedIndex, index, bookGroups]);
+}, [selectedIndex, index]);
 
     /* ---------------- BOOK ANIMATION ---------------- */
 
@@ -243,7 +368,10 @@ export default function Shelf({
     if (selectedIndex !== null && selectedIndex !== index) return null;
 
     return (
-        <group position={position} onClick={onClick}>
+       <group position={position} onClick={onClick}>
+            {/* Row difficulty banners sit in front of the shelf */}
+            <group ref={bannerGroupRef} />
+
             <group
                 ref={groupRef}
                 onPointerDown={selectedIndex !== null ? handleMeshClick : undefined}
