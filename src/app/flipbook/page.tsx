@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import Image from "next/image";
+import booksData from "../../../config.json"
 
 type CoverProps = {
   title: string;
@@ -195,7 +196,78 @@ const Page = React.forwardRef<HTMLDivElement, PageProps>(
 Page.displayName = "Page";
 
 
-export default function Home() {
+export default function Home({ bookId }: { bookId: string }) {
+  const bookMeta = booksData[bookId];
+
+  if (!bookMeta) {
+    return (
+      <div className="text-white text-xl">
+        Book not found.
+      </div>
+    );
+  }
+
+  const BOOK_DATA: FlipBookData = {
+    meta: {
+      id: bookId,
+      category: "Web Development",
+      level: "Beginner",
+      totalPages: 4,
+    },
+
+    frontCover: {
+      title: bookMeta.name,
+      subtitle: "Web Dev Library",
+      author: bookMeta.author,
+      coverImage: "/covers/default-cover.png",
+    },
+
+    pages: [
+      {
+        number: 1,
+        title: "Overview",
+        sections: [
+          {
+            type: "text",
+            content: bookMeta.description,
+          },
+        ],
+      },
+      {
+        number: 2,
+        title: "About the Author",
+        sections: [
+          {
+            type: "text",
+            content: `${bookMeta.author} is a contributor to the Web Dev Library series.`,
+          },
+        ],
+      },
+      {
+        number: 3,
+        title: "Why This Book Matters",
+        sections: [
+          {
+            type: "list",
+            content: [
+              "Covers essential concepts",
+              "Practical examples",
+              "Structured learning path",
+            ],
+          },
+        ],
+      },
+    ],
+
+    backCover: {
+      title: "End of Preview",
+      subtitle: "Continue Exploring the Library",
+      isBack: true,
+      backgroundColor: "#e5e5e5",
+      textColor: "#111",
+    },
+  };
+
   const flipBookRef = useRef<any>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [speaking, setSpeaking] = useState(false);
@@ -231,7 +303,7 @@ export default function Home() {
 
   return (
     <main className="h-screen w-screen bg-black flex items-center justify-center p-4 relative">
-      
+
       {/* TTS Controls */}
       <div className="absolute top-6 right-6 z-50">
         {!speaking ? (

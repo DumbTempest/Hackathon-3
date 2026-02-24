@@ -1,52 +1,402 @@
 {
-    "group52911205-web-dev-4-0": {
+    "group921219821-web-dev-0-48": {
         "name": "JavaScript Foundations",
         "description": "A beginner-friendly introduction to variables, functions, loops, and core JavaScript concepts.",
-        "author": "Alex Carter"
+        "author": "Alex Carter",
+        "pages": [
+            {
+                "title": "Introduction to JavaScript",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "JavaScript powers interactive web experiences."
+                    },
+                    {
+                        "type": "list",
+                        "content": [
+                            "Runs in browser",
+                            "Dynamic typing",
+                            "Event-driven",
+                            "Flexible syntax"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Variables & Types",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "let age = 25;"
+                    },
+                    {
+                        "type": "text",
+                        "content": "JS supports string, number, boolean, null, undefined, and objects."
+                    }
+                ]
+            },
+            {
+                "title": "Functions",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "function greet(name){ return 'Hi ' + name }"
+                    }
+                ]
+            },
+            {
+                "title": "Control Flow",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "if(condition){ ... } else { ... }"
+                    }
+                ]
+            }
+        ]
     },
-    "group2019258969-web-dev-4-1": {
+    "group1688433415-web-dev-0-49": {
         "name": "DOM Manipulation Guide",
         "description": "Learn how to dynamically update web pages using the Document Object Model.",
-        "author": "Sophie Lin"
+        "author": "Sophie Lin",
+        "pages": [
+            {
+                "title": "What is the DOM?",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "The DOM represents HTML as a structured tree."
+                    }
+                ]
+            },
+            {
+                "title": "Selecting Elements",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "document.querySelector('#id')"
+                    }
+                ]
+            },
+            {
+                "title": "Updating Content",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "element.innerText = 'Updated'"
+                    }
+                ]
+            },
+            {
+                "title": "Event Handling",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "button.addEventListener('click', handler)"
+                    }
+                ]
+            }
+        ]
     },
-    "group530783793-web-dev-4-2": {
+    "group660775291-web-dev-0-50": {
         "name": "Modern ES6+",
         "description": "Explore arrow functions, destructuring, modules, and modern JavaScript patterns.",
-        "author": "Daniel Reed"
+        "author": "Daniel Reed",
+        "pages": [
+            {
+                "title": "Arrow Functions",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "const add = (a,b) => a+b;"
+                    }
+                ]
+            },
+            {
+                "title": "Destructuring",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "const {name} = user;"
+                    }
+                ]
+            },
+            {
+                "title": "Spread Operator",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "const newArr = [...arr];"
+                    }
+                ]
+            },
+            {
+                "title": "Modules",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "export default function App(){}"
+                    }
+                ]
+            }
+        ]
     },
-    "group1952739294-web-dev-4-3": {
+    "group849927048-web-dev-0-51": {
         "name": "Async JavaScript",
         "description": "Master promises, async/await, and asynchronous programming techniques.",
-        "author": "Maya Patel"
+        "author": "Maya Patel",
+        "pages": [
+            {
+                "title": "Callbacks",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Callbacks execute after async operations."
+                    }
+                ]
+            },
+            {
+                "title": "Promises",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "fetch(url).then(res => res.json())"
+                    }
+                ]
+            },
+            {
+                "title": "Async/Await",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "const data = await fetch(url);"
+                    }
+                ]
+            },
+            {
+                "title": "Error Handling",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "try { } catch(err) { }"
+                    }
+                ]
+            }
+        ]
     },
-    "group1085224916-web-dev-4-4": {
+    "group1990887317-web-dev-0-52": {
         "name": "TypeScript Essentials",
         "description": "Strong typing for scalable applications with practical TypeScript examples.",
-        "author": "Oliver Grant"
+        "author": "Oliver Grant",
+        "pages": [
+            {
+                "title": "Why TypeScript?",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Adds static typing to JavaScript."
+                    }
+                ]
+            },
+            {
+                "title": "Interfaces",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "interface User { name: string }"
+                    }
+                ]
+            },
+            {
+                "title": "Generics",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "function identity<T>(arg:T):T{}"
+                    }
+                ]
+            },
+            {
+                "title": "Type Safety",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Prevents runtime errors and improves tooling."
+                    }
+                ]
+            }
+        ]
     },
-    "group645472221-web-dev-4-5": {
+    "group898475564-web-dev-0-53": {
         "name": "Node.js Backend Basics",
         "description": "Build REST APIs and backend services using Node.js and Express.",
-        "author": "Emma Brooks"
+        "author": "Emma Brooks",
+        "pages": [
+            {
+                "title": "What is Node?",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Node.js runs JS outside the browser."
+                    }
+                ]
+            },
+            {
+                "title": "Express Setup",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "const app = require('express')();"
+                    }
+                ]
+            },
+            {
+                "title": "Routing",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "app.get('/users', handler)"
+                    }
+                ]
+            },
+            {
+                "title": "Middleware",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Functions that run between request and response."
+                    }
+                ]
+            }
+        ]
     },
-    "group362314774-web-dev-4-6": {
+    "group323163343-web-dev-0-54": {
         "name": "React Fundamentals",
         "description": "Understand components, hooks, state, and building dynamic UIs.",
-        "author": "Liam Foster"
+        "author": "Liam Foster",
+        "pages": [
+            {
+                "title": "Components",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Reusable building blocks of UI."
+                    }
+                ]
+            },
+            {
+                "title": "State",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "const [count,setCount] = useState(0);"
+                    }
+                ]
+            },
+            {
+                "title": "Props",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Pass data between components."
+                    }
+                ]
+            },
+            {
+                "title": "Hooks",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Special functions like useEffect."
+                    }
+                ]
+            }
+        ]
     },
-    "group416218763-web-dev-4-7": {
+    "group1437755864-web-dev-0-55": {
         "name": "Next.js in Practice",
         "description": "Server-side rendering, routing, and production-ready React apps.",
-        "author": "Noah Bennett"
+        "author": "Noah Bennett",
+        "pages": [
+            {
+                "title": "File Routing",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "App Router enables nested routing."
+                    }
+                ]
+            },
+            {
+                "title": "SSR",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Render pages on the server."
+                    }
+                ]
+            },
+            {
+                "title": "API Routes",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "export async function GET(){}"
+                    }
+                ]
+            },
+            {
+                "title": "Deployment",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Deploy seamlessly on Vercel."
+                    }
+                ]
+            }
+        ]
     },
-    "group114757839-web-dev-4-8": {
+    "group1702643057-web-dev-0-56": {
         "name": "Advanced React Patterns",
         "description": "Context, reducers, performance optimization, and architecture patterns.",
-        "author": "Ava Thompson"
-    },
-    "group1945462045-web-dev-4-9": {
-        "name": "Web Security Basics",
-        "description": "Protect applications from XSS, CSRF, and common vulnerabilities.",
-        "author": "Ethan Hayes"
+        "author": "Ava Thompson",
+        "pages": [
+            {
+                "title": "Context API",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Share state globally across components."
+                    }
+                ]
+            },
+            {
+                "title": "Reducers",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "const [state,dispatch] = useReducer(reducer, init);"
+                    }
+                ]
+            },
+            {
+                "title": "Memoization",
+                "sections": [
+                    {
+                        "type": "highlight",
+                        "content": "useMemo(() => compute(), []);"
+                    }
+                ]
+            },
+            {
+                "title": "Performance Optimization",
+                "sections": [
+                    {
+                        "type": "text",
+                        "content": "Avoid unnecessary re-renders."
+                    }
+                ]
+            }
+        ]
     }
 }
